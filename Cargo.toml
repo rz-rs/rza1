@@ -3,6 +3,12 @@ name = "rza1"
 version = "0.0.1"
 authors = ["yvt <i@yvt.jp>"]
 edition = "2018"
+license = "CC0-1.0"
+keywords = ["arm", "register", "peripheral"]
+categories = ["embedded", "hardware-support", "no-std"]
+description = "Peripheral access API for the Renesas RZ/A1 MPU family"
+repository = "https://github.com/yvt/rust-rza1"
+exclude = ["*.svd", "*.sh"]
 
 [dependencies]
 bare-metal = "0.1.0"
