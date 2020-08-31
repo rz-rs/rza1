@@ -275,5 +275,739 @@
       <description>OS Timer 1</description>
     </peripheral>
     <!-- OSTM1 -->
+
+    <!-- SC0 -->
+    <peripheral>
+      <name>SC0</name>
+      <baseAddress>0xe8007000</baseAddress>
+      <groupName>Serial Communication Interface with FIFO</groupName>
+      <description>Serial Communication Interface with FIFO 0</description>
+      <registers>
+        <register>
+          <name>SMR</name>
+          <description>Serial Mode Register (SCSMR) - SCSMR specifies the serial communication format and selects the clock source for the baud rate generator.</description>
+          <addressOffset>0x000</addressOffset>
+          <width>16</width>
+          <size>16</size>
+          <fields>
+            <field>
+              <name>CA</name>
+              <msb>7</msb><lsb>7</lsb>
+              <description>Communication Mode - Selects operating mode from asynchronous and clock synchronous modes.</description>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Asynchronous</name>
+                  <description>Asynchronous mode</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>ClockSynchronous</name>
+                  <description>Clock synchronous mode</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CHR</name>
+              <msb>6</msb><lsb>6</lsb>
+              <description>Character Length - Selects 7-bit or 8-bit data length in asynchronous mode. In the clock synchronous mode, the data length is always 8 bits, regardless of the CHR setting.</description>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>8</name>
+                  <description>8-bit data</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>7</name>
+                  <description>7-bit data</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>PE</name>
+              <msb>5</msb><lsb>5</lsb>
+              <description>Parity Enable - Selects whether to add a parity bit to transmit data and to check the parity of receive data, in asynchronous mode. In clock synchronous mode, a parity bit is neither added nor checked, regardless of the PE setting.</description>
+            </field>
+            <field>
+              <name>OE</name>
+              <msb>4</msb><lsb>4</lsb>
+              <description>Parity Mode - Selects even or odd parity when parity bits are added and checked. The O/E setting is used only in asynchronous mode and only when the parity enable bit (PE) is set to 1 to enable parity addition and checking. The O/E setting is ignored in clock synchronous mode or in asynchronous mode when parity addition and checking is disabled.</description>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Even</name>
+                  <description>Even parity - If even parity is selected, the parity bit is added to transmit data to make an even number of 1s in the transmitted character and parity bit combined. Receive data is checked to see if it has an even number of 1s in the received character and parity bit combined.</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Odd</name>
+                  <description>Odd parity - If odd parity is selected, the parity bit is added to transmit data to make an odd number of 1s in the transmitted character and parity bit combined. Receive data is checked to see if it has an odd number of 1s in the received character and parity bit combined.</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>STOP</name>
+              <msb>3</msb><lsb>3</lsb>
+              <description>Stop Bit Length - Selects one or two bits as the stop bit length in asynchronous mode. This setting is used only in asynchronous mode. It is ignored in clock synchronous mode because no stop bits are added. When receiving, only the first stop bit is checked, regardless of the STOP bit setting. If the second stop bit is 1, it is treated as a stop bit, but if the second stop bit is 0, it is treated as the start bit of the next incoming character.</description>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>1</name>
+                  <description>One stop bit - When transmitting, a single 1-bit is added at the end of each transmitted character.</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>2</name>
+                  <description>Two stop bits - When transmitting, two 1 bits are added at the end of each transmitted character.</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CKS</name>
+              <msb>1</msb><lsb>0</lsb>
+              <description>Clock Select - Select the internal clock source of the on-chip baud rate generator. For further information on the clock source, bit rate register settings, and baud rate, see section 14.3.8, Bit Rate Register (SCBRR).</description>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>DIVIDE_BY_1</name>
+                  <description>P1ϕ</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>DIVIDE_BY_4</name>
+                  <description>P1ϕ/4</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>DIVIDE_BY_16</name>
+                  <description>P1ϕ/16</description>
+                  <value>2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>DIVIDE_BY_64</name>
+                  <description>P1ϕ/64</description>
+                  <value>3</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>BRR</name>
+          <description>Bit Rate Register (SCBRR) - SCBRR is an 8-bit register that is used with the CKS1 and CKS0 bits in the serial mode register (SCSMR) and the BGDM and ABCS bits in the serial extension mode register (SCEMR) to determine the serial transmit/receive bit rate.</description>
+          <addressOffset>0x004</addressOffset>
+          <width>8</width>
+          <size>8</size>
+        </register>
+        <register>
+          <name>SCR</name>
+          <description>Serial Control Register (SCSCR) - SCSCR enables/disables the transmitter/receiver operation and interrupt requests, and selects the transmit/receive clock source. The CPU can always read and write to SCSCR.</description>
+          <addressOffset>0x008</addressOffset>
+          <width>16</width>
+          <size>16</size>
+          <fields>
+            <field>
+              <name>TIE</name>
+              <msb>7</msb><lsb>7</lsb>
+              <description>Transmit Interrupt Enable - Enables or disables the transmit-FIFO-data-empty interrupt (TXI) requested when the serial transmit data is transferred from the transmit FIFO data register (SCFTDR) to the transmit shift register (SCTSR), the quantity of data in the transmit FIFO register becomes less than the specified number of transmission triggers, and then the TDFE flag in the serial status register (SCFSR) is set to 1.</description>
+            </field>
+            <field>
+              <name>RIE</name>
+              <msb>6</msb><lsb>6</lsb>
+              <description>Receive Interrupt Enable - Enables or disables the receive FIFO data full (RXI) interrupts requested when the RDF flag or DR flag in serial status register (SCFSR) is set to 1, receive-error (ERI) interrupts requested when the ER flag in SCFSR is set to 1, and break (BRI) interrupts requested when the BRK flag in SCFSR or the ORER flag in line status register (SCLSR) is set to 1.</description>
+            </field>
+            <field>
+              <name>TE</name>
+              <msb>5</msb><lsb>5</lsb>
+              <description>Transmit Enable - Enables or disables serial transmission.</description>
+            </field>
+            <field>
+              <name>RE</name>
+              <msb>4</msb><lsb>4</lsb>
+              <description>Receive Enable - Enables or disables serial reception.</description>
+            </field>
+            <field>
+              <name>REIE</name>
+              <msb>3</msb><lsb>3</lsb>
+              <description>Receive Error Interrupt Enable - Enables or disables the receive-error (ERI) interrupts and break (BRI) interrupts. The setting of REIE bit is valid only when RIE bit is set to 0.</description>
+            </field>
+            <field>
+              <name>CKE</name>
+              <msb>1</msb><lsb>0</lsb>
+              <description>Clock Enable - Select the clock source and enable or disable clock output from the SCK pin. Depending on CKE[1:0], the SCK pin can be used for serial clock output or serial clock input. If synchronous clock output is set in clock synchronous mode, set the C/A bit in SCSMR to 1, and then set CKE[1:0].</description>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>INTERNAL_SCK_IN</name>
+                  <description>Asynchronous mode: Internal clock, SCK pin used for input (input signal is ignored). Clock synchronous mode: Internal clock, SCK pin used for synchronous clock output.</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>INTERNAL_SCK_OUT</name>
+                  <description>Internal clock, SCK pin used for synchronous clock output</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>EXTERNAL_SCK_IN</name>
+                  <description>External clock, SCK pin used for synchronous clock input</description>
+                  <value>2</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>FTDR</name>
+          <description>Transmit FIFO Data Register (SCFTDR) - SCFTDR is a 16-stage FIFO register that stores data for serial transmission. When the transmit shift register (SCTSR) empty is detected, transmit data written in the SCFTDR is moved to SCTSR and serial transmission is started. Continuous serial transmission is performed until there is no transmit data left in SCFTDR. The CPU can write to SCFTDR at all times.</description>
+          <addressOffset>0x00c</addressOffset>
+          <width>8</width>
+          <size>8</size>
+          <access>write-only</access>
+        </register>
+        <register>
+          <name>FSR</name>
+          <description>Serial Status Register (SCFSR) - SCFSR is a 16-bit register. The upper 8 bits indicate the number of receive errors in the receive FIFO data register, and the lower 8 bits indicate the status flag indicating operating state.
+
+          The CPU can always read from and write to SCFSR, but cannot write 1 to the status flags (ER, TEND, TDFE, BRK, RDF, and DR). These flags can be cleared to 0 only if they have first been read (after being set to 1). The PER flag (bits 15 to 12 and bit 2) and the FER flag (bits 11 to 8 and bit 3) are read-only bits that cannot be written.</description>
+          <addressOffset>0x010</addressOffset>
+          <width>16</width>
+          <size>16</size>
+          <fields>
+            <field>
+              <name>PERNum</name>
+              <msb>15</msb><lsb>12</lsb>
+              <description>Number of Parity Errors - Indicate the quantity of data including a parity error in the receive data stored in the receive FIFO data register (SCFRDR). The value indicated by bits 15 to 12 after the ER bit in SCFSR is set, represents the number of parity errors in SCFRDR. When parity errors have occurred in all 16-byte receive data in SCFRDR, PER[3:0] shows 0000.</description>
+            </field>
+            <field>
+              <name>FERNum</name>
+              <msb>11</msb><lsb>8</lsb>
+              <description>Number of Framing Errors - Indicate the quantity of data including a framing error in the receive data stored in SCFRDR. The value indicated by bits 11 to 8 after the ER bit in SCFSR is set, represents the number of framing errors in SCFRDR. When framing errors have occurred in all 16-byte receive data in SCFRDR, FER[3:0] shows 0000.</description>
+            </field>
+            <field>
+              <name>ER</name>
+              <msb>7</msb><lsb>7</lsb>
+              <description>
+                Receive Error - currence of a framing error, or of a parity error when receiving data that includes parity.(*1)
+
+                0: Receiving is in progress or has ended normally
+
+                [Clearing conditions]
+                 - ER is cleared to 0 by a power-on reset
+                 - ER is cleared to 0 when 0 is written to after 1 is read from ER
+
+                1: A framing error or parity error has occurred.
+
+                [Setting conditions]
+                 - ER is set to 1 when the stop bit is 0 after checking whether or not the last stop
+                bit of the received data is 1 at the end of one data receive operation (*2)
+                 - ER is set to 1 when the total number of 1s in the receive data plus parity bit does not match the even/odd parity specified by the O/E bit in SCSMR
+
+                (*1) Clearing the RE bit to 0 in SCSCR does not affect the ER bit, which retains its previous value. Even if a receive error occurs, the receive data is transferred to SCFRDR and the receive operation is continued. Whether or not the data read from SCFRDR includes a receive error can be detected by the FER and PER bits in SCFSR.
+
+                (*2) In two stop bits mode, only the first stop bit is checked; the second stop bit is not checked.
+              </description>
+            </field>
+            <field>
+              <name>TEND</name>
+              <msb>6</msb><lsb>6</lsb>
+              <description>
+                Transmit End - Indicates that when the last bit of a serial character was transmitted, SCFTDR did not contain valid data, so transmission has ended.
+
+                0: Transmission is in progress
+
+                [Clearing condition]
+                 - TEND is cleared to 0 when 0 is written after 1 is read from TEND after transmit data is written in SCFTDR (*1)
+
+                1: End of transmission
+
+                [Setting conditions]
+                 - TEND is set to 1 by a power-on reset
+                 - TEND is set to 1 when TE is cleared to 0 in the serial control register (SCSCR)
+                 - TEND is set to 1 when SCFTDR does not contain transmit data when the last bit of a one-byte serial character is transmitted
+
+                (*1) Do not use this bit as a transmit end flag when the direct memory
+                access controller writes data to SCFTDR due to a TXI interrupt request.
+              </description>
+            </field>
+            <field>
+              <name>TDFE</name>
+              <msb>5</msb><lsb>5</lsb>
+              <description>
+                Transmit FIFO Data Empty - Indicates that data has been transferred from the transmit FIFO data register (SCFTDR) to the transmit shift register (SCTSR), the quantity of data in SCFTDR has become less than the transmission trigger number specified by the TTRG[1:0] bits in the FIFO control register (SCFCR), and writing of transmit data to SCFTDR is enabled.
+
+                0: The quantity of transmit data written to SCFTDR is greater than the specified
+                transmission trigger number
+
+                [Clearing conditions]
+                 - TDFE is cleared to 0 when data exceeding the specified transmission trigger number is written to SCFTDR after 1 is read from TDFE and then 0 is written to TDFE
+                 - TDFE is cleared to 0 when direct memory access controller is activated by transmit FIFO data empty interrupt (TXI) and data exceeding the specified transmission trigger number is written to SCFTDR
+
+                1: The quantity of transmit data in SCFTDR is less than or equal to the specified
+                transmission trigger number (*1)
+
+                [Setting conditions]
+                 - TDFE is set to 1 by a power-on reset
+                 - TDFE is set to 1 when the quantity of transmit data in SCFTDR becomes less than or equal to the specified transmission trigger number as a result of transmission
+
+                (*1) Since SCFTDR is a 16-byte FIFO register, the maximum quantity of
+                data that can be written when TDFE is 1 is "16 minus the specified transmission trigger number". If an attempt is made to write additional data, the data is ignored. The quantity of data in SCFTDR is indicated by the upper 8 bits of SCFDR.
+              </description>
+            </field>
+            <field>
+              <name>BRK</name>
+              <msb>4</msb><lsb>4</lsb>
+              <description>
+                Break Detection - Indicates that a break signal has been detected in receive data.
+
+                0: No break signal received
+
+                [Clearing conditions]
+                 - BRK is cleared to 0 by a power-on reset
+                 - BRK is cleared to 0 when software reads BRK after it has been set to 1, then writes 0 to BRK
+
+                1: Break signal received (*1)
+
+                [Setting condition]
+                 - BRK is set to 1 when data including a framing error is received, followed by at least one frame at the space 0 level (low level)
+
+                (*1) When a break is detected, transfer of the receive data (H'00) to
+                SCFRDR stops after detection. When the break ends and the receive signal becomes mark 1, the transfer of receive data resumes.
+              </description>
+            </field>
+            <field>
+              <name>FER</name>
+              <msb>3</msb><lsb>3</lsb>
+              <access>read-only</access>
+              <description>
+                Framing Error Indication -Indicates a framing error in the data read from the receive FIFO data register (SCFRDR) in asynchronous mode.
+
+                0: No receive framing error occurred in the next data read from SCFRDR
+
+                [Clearing conditions]
+                 - FER is cleared to 0 by a power-on reset
+                 - FER is cleared to 0 when no framing error is present in the next data read from SCFRDR
+
+                1: A receive framing error occurred in the next data read from SCFRDR
+
+                [Setting condition]
+                 - FER is set to 1 when a framing error is present in the next data read from
+                SCFRDR
+              </description>
+            </field>
+            <field>
+              <name>PER</name>
+              <msb>2</msb><lsb>2</lsb>
+              <access>read-only</access>
+              <description>
+                Parity Error Indication - Indicates a parity error in the data read from the receive FIFO data register (SCFRDR) in asynchronous mode.
+
+                0: No receive parity error occurred in the next data read from SCFRDR
+
+                [Clearing conditions]
+                 - PER is cleared to 0 by a power-on reset
+                 - PER is cleared to 0 when no parity error is present in the next data read from SCFRDR
+
+                1: A receive parity error occurred in the next data read from SCFRDR
+
+                [Setting condition]
+                 - PER is set to 1 when a parity error is present in the next data read from SCFRDR
+              </description>
+            </field>
+            <field>
+              <name>RDF</name>
+              <msb>1</msb><lsb>1</lsb>
+              <description>
+                Receive FIFO Data Full - Indicates that receive data has been transferred to the receive FIFO data register (SCFRDR), and the quantity of data in SCFRDR has become more than the receive trigger number specified by the RTRG[1:0] bits in the FIFO control register (SCFCR).
+
+                0: The quantity of transmit data written to SCFRDR is less than the specified
+                receive trigger number
+
+                [Clearing conditions]
+                 - RDF is cleared to 0 by a power-on reset
+                 - RDF is cleared to 0 when the SCFRDR is read until the quantity of receive data in SCFRDR becomes less than the specified receive trigger number after 1 is read from RDF, and then 0 is written
+                 - RDF is cleared to 0 when the direct memory access controller is activated by receive FIFO data full interrupt (RXI) and SCFRDR is read until the quantity of receive data in it becomes less than the specified receive trigger number
+
+                1: The quantity of receive data in SCFRDR is more than the specified receive
+                trigger number
+
+                [Setting condition]
+                 - RDF is set to 1 when a quantity of receive data more than the specified
+                receive trigger number is stored in SCFRDR (*1)
+
+                (*1) As SCFRDR is a 16-byte FIFO register, the maximum quantity of data
+                that can be read when RDF is 1 is the specified receive trigger number. If an attempt is made to read after all the data in SCFRDR has been read, the data is undefined. The quantity of receive data in SCFRDR is indicated by the lower 8 bits of SCFDR.
+              </description>
+            </field>
+            <field>
+              <name>DR</name>
+              <msb>0</msb><lsb>0</lsb>
+              <description>
+                Receive Data Ready -Indicates that the quantity of data in the receive FIFO data register (SCFRDR) is less than the specified receive trigger number, and that the next data has not yet been received after the elapse of 15 ETU from the last stop bit in asynchronous mode. In clock synchronous mode, this bit is not set to 1.
+
+                0: Receiving is in progress, or no receive data remains in SCFRDR after
+                receiving ended normally
+
+                [Clearing conditions]
+                 - DR is cleared to 0 by a power-on reset
+                 - DR is cleared to 0 when all receive data are read from SCFRDR after 1 is read
+                from DR, and then 0 is written.
+                 - DR is cleared to 0 when all receive data are read from SCFRDR after the
+                direct memory access controller is activated by receive FIFO data full interrupt
+                (RXI).
+
+                1: Next receive data has not been received
+
+                [Setting condition]
+                 - DR is set to 1 when SCFRDR contains less data than the specified receive
+                trigger number, and the next data has not yet been received after the elapse of
+                15 ETU from the last stop bit. (*1)
+
+                (*1) This is equivalent to 1.5 frames with the 8-bit, 1-stop-bit format. (ETU:
+                elementary time unit)
+              </description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>FRDR</name>
+          <description>Receive FIFO Data Register (SCFRDR) - SCFRDR is a 16-stage FIFO register that stores serial receive data. The reception of one byte of serial data is complete when the received data is moved from the receive shift register (SCRSR) to SCFRDR for storage. Continuous reception is possible until 16 bytes are stored. The CPU can read but not write to SCFRDR. If data is read when there is no receive data in the SCFRDR, the value is undefined.</description>
+          <addressOffset>0x014</addressOffset>
+          <width>8</width>
+          <size>8</size>
+          <access>read-only</access>
+        </register>
+        <register>
+          <name>FCR</name>
+          <description>FIFO Control Register (SCFCR) - SCFCR resets the quantity of data in the transmit and receive FIFO data registers, sets the trigger data quantity, and contains an enable bit for loop-back testing. SCFCR can always be read and written to by the CPU.</description>
+          <addressOffset>0x018</addressOffset>
+          <width>16</width>
+          <size>16</size>
+          <fields>
+            <field>
+              <name>RSTRG</name>
+              <msb>10</msb><lsb>8</lsb>
+              <description>RTS Output Active Trigger - When the quantity of receive data in receive FIFO data register (SCFRDR) becomes more than the number shown below, RTS signal is set to high.</description>
+              <enumeratedValues>
+                <enumeratedValue><name>15</name><value>0</value></enumeratedValue>
+                <enumeratedValue><name>1</name><value>1</value></enumeratedValue>
+                <enumeratedValue><name>4</name><value>2</value></enumeratedValue>
+                <enumeratedValue><name>6</name><value>3</value></enumeratedValue>
+                <enumeratedValue><name>8</name><value>4</value></enumeratedValue>
+                <enumeratedValue><name>10</name><value>5</value></enumeratedValue>
+                <enumeratedValue><name>12</name><value>6</value></enumeratedValue>
+                <enumeratedValue><name>14</name><value>7</value></enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RTRG</name>
+              <msb>7</msb><lsb>6</lsb>
+              <description>
+                Receive FIFO Data Trigger - Set the quantity of receive data which sets the receive data full (RDF) flag in the serial status register (SCFSR). The RDF flag is set to 1 when the quantity of receive data stored in the receive FIFO data register (SCFRDR) is increased more than the set trigger number shown below.
+
+                Note: In clock synchronous mode, to transfer the receive data using the direct memory access controller, set the receive trigger number to 1. If set to other than 1, CPU must read the receive data left in SCFRDR.
+              </description>
+              <enumeratedValues>
+                <enumeratedValue><name>1</name><value>0</value></enumeratedValue>
+                <enumeratedValue>
+                  <name>4Or2</name><value>1</value>
+                  <description>
+                    Asynchronous mode: 4, Clock synchronous mode: 2
+                  </description>
+                </enumeratedValue>
+                <enumeratedValue><name>8</name><value>2</value></enumeratedValue>
+                <enumeratedValue><name>14</name><value>3</value></enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>TTRG</name>
+              <msb>5</msb><lsb>4</lsb>
+              <description>
+                Transmit FIFO Data Trigger - Set the quantity of remaining transmit data which sets the transmit FIFO data register empty (TDFE) flag in the serial status register (SCFSR). The TDFE flag is set to 1 when the quantity of transmit data in the transmit FIFO data register (SCFTDR) becomes less than the set trigger number shown below.
+
+                Note: Values in parentheses mean the number of empty bytes in SCFTDR when the TDFE flag is set to 1.
+              </description>
+              <enumeratedValues>
+                <enumeratedValue><name>8</name><value>0</value><description>(8)</description></enumeratedValue>
+                <enumeratedValue><name>4</name><value>1</value><description>(12)</description></enumeratedValue>
+                <enumeratedValue><name>2</name><value>2</value><description>(14)</description></enumeratedValue>
+                <enumeratedValue><name>0</name><value>3</value><description>(16)</description></enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>MCR</name>
+              <msb>3</msb><lsb>3</lsb>
+              <description>Modem Control Enable - Enables modem control signals CTS and RTS. For channels 0, 2 to 4, and 6 in clock synchronous mode, MCE bit should always be 0.</description>
+            </field>
+            <field>
+              <name>TFRST</name>
+              <msb>2</msb><lsb>2</lsb>
+              <description>Transmit FIFO Data Register Reset - Disables the transmit data in the transmit FIFO data register and resets the register to the empty state.</description>
+            </field>
+            <field>
+              <name>RFRST</name>
+              <msb>1</msb><lsb>1</lsb>
+              <description>Receive FIFO Data Register Reset - Disables the receive data in the receive FIFO data register and resets the register to the empty state.</description>
+            </field>
+            <field>
+              <name>LOOP</name>
+              <msb>0</msb><lsb>0</lsb>
+              <description>Loop-Back Test - Internally connects the transmit output pin (TxD) and receive input pin (RxD) and internally connects the RTS pin and CTS pin and enables loop-back testing.</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>FDR</name>
+          <description>
+            FIFO Data Count Set Register (SCFDR) - SCFDR is a 16-bit register which indicates the quantity of data stored in the transmit FIFO data register (SCFTDR) and the receive FIFO data register (SCFRDR).
+
+            It indicates the quantity of transmit data in SCFTDR with the upper 8 bits, and the quantity of receive data in SCFRDR with the lower 8 bits. SCFDR can always be read by the CPU.
+          </description>
+          <addressOffset>0x01c</addressOffset>
+          <width>16</width>
+          <size>16</size>
+          <access>read-only</access>
+          <fields>
+            <field>
+              <name>T</name>
+              <msb>12</msb><lsb>8</lsb>
+              <description>T4 to T0 bits indicate the quantity of non-transmitted data stored in SCFTDR. H'00 means no transmit data, and H'10 means that all transmit data is stored in SCFTDR.</description>
+            </field>
+            <field>
+              <name>R</name>
+              <msb>4</msb><lsb>0</lsb>
+              <description>R4 to R0 bits indicate the quantity of receive data stored in SCFRDR. H'00 means no receive data, and H'10 means that all receive data is stored in SCFRDR.</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SPTR</name>
+          <description>Serial Port Register (SCSPTR) - SCSPTR controls input/output and data of pins multiplexed to the functions of this module. Bits 7 and 6 can control input/output data of RTS pin. Bits 5 and 4 can control input/output data of CTS pin. Bits 3 and 2 can control input/output data of SCK pin. Bits 1 and 0 can input data from RxD pin and output data to TxD pin, so they control break of serial transmitting/receiving.</description>
+          <addressOffset>0x020</addressOffset>
+          <width>16</width>
+          <size>16</size>
+          <fields>
+            <field>
+              <name>RTSIO</name>
+              <msb>7</msb><lsb>7</lsb>
+              <description>RTS Port Input/Output - Specifies input or output for the serial port RTS pin. When the RTS pin is actually used as a port outputting the RTSDT bit value, the MCE bit in SCFCR should be cleared to 0.</description>
+            </field>
+            <field>
+              <name>RTSDT</name>
+              <msb>6</msb><lsb>6</lsb>
+              <description>RTS Port Data - Specifies the input/output data of the serial port RTS pin. Input/output is specified by the RTSIO bit. For output, the RTSDT bit value is output to the RTS pin. The RTS pin status is read from the RTSDT bit regardless of the RTSIO bit setting. However, RTS input/output must be set in the general purpose I/O ports.</description>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Low</name>
+                  <description>Input/output data is low level</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>High</name>
+                  <description>Input/output data is high level</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CTSIO</name>
+              <msb>5</msb><lsb>5</lsb>
+              <description>CTS Port Input/Output - Specifies input or output for the serial port CTS pin. When the CTS pin is actually used as a port outputting the CTSDT bit value, the MCE bit in SCFCR should be cleared to 0.</description>
+            </field>
+            <field>
+              <name>CTSDT</name>
+              <msb>4</msb><lsb>4</lsb>
+              <description>CTS Port Data - Specifies the input/output data of the serial port CTS pin. Input/output is specified by the CTSIO bit. For output, the CTSDT bit value is output to the CTS pin. The CTS pin status is read from the CTSDT bit regardless of the CTSIO bit setting. However, CTS input/output must be set in the general purpose I/O ports.</description>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Low</name>
+                  <description>Input/output data is low level</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>High</name>
+                  <description>Input/output data is high level</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>SCKIO</name>
+              <msb>3</msb><lsb>3</lsb>
+              <description>SCK Port Input/Output - Specifies input or output for the serial port SCK pin. When the SCK pin is actually used as a port outputting the SCKDT bit value, the CKE[1:0] bits in SCSCR should be cleared to 0.</description>
+            </field>
+            <field>
+              <name>SCKDT</name>
+              <msb>2</msb><lsb>2</lsb>
+              <description>SCK Port Data - Specifies the input/output data of the serial port SCK pin. Input/output is specified by the SCKIO bit. For output, the SCKDT bit value is output to the SCK pin. The SCK pin status is read from the SCKDT bit regardless of the SCKIO bit setting. However, SCK input/output must be set in the general purpose I/O ports.</description>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Low</name>
+                  <description>Input/output data is low level</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>High</name>
+                  <description>Input/output data is high level</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>SPB2IO</name>
+              <msb>1</msb><lsb>1</lsb>
+              <description>Serial Port Break Input/Output - Specifies input or output for the serial port TxD pin. When the TxD pin is actually used as a port outputting the SPB2DT bit value, the TE bit in SCSCR should be cleared to 0.</description>
+            </field>
+            <field>
+              <name>SPB2DT</name>
+              <msb>0</msb><lsb>0</lsb>
+              <description>Serial Port Break Data - Specifies the input data of the RxD pin and the output data of the TxD pin used as serial ports. Input/output is specified by the SPB2IO bit. When the TxD pin is set to output, the SPB2DT bit value is output to the TxD pin. The RxD pin status is read from the SPB2DT bit regardless of the SPB2IO bit setting. However, RxD input and TxD output must be set in the general purpose I/O ports.</description>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Low</name>
+                  <description>Input/output data is low level</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>High</name>
+                  <description>Input/output data is high level</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>LSR</name>
+          <description>Line Status Register (SCLSR) - The CPU can always read or write to SCLSR, but cannot write 1 to the ORER flag. This flag can be cleared to 0 only if it has first been read (after being set to 1).</description>
+          <addressOffset>0x024</addressOffset>
+          <width>16</width>
+          <size>16</size>
+          <fields>
+            <field>
+              <name>ORER</name>
+              <msb>0</msb><lsb>0</lsb>
+              <description>
+                Overrun Error - Indicates the occurrence of an overrun error during reception.
+
+                0: Receiving is in progress or has ended normally (*1)
+
+                [Clearing conditions]
+                - ORER is cleared to 0 by a power-on reset
+                - ORER is cleared to 0 when 0 is written after 1 is read from ORER.
+
+                1: An overrun error has occurred during reception (*2)
+
+                [Setting condition]
+                - ORER is set to 1 when the next serial receiving is finished while the receive
+                FIFO is full of 16-byte receive data.
+
+                (*1) Clearing the RE bit to 0 in SCSCR does not affect the ORER bit, which retains its previous value.
+
+                (*2) The receive FIFO data register (SCFRDR) retains the data before an overrun error has occurred, and the next received data is discarded. When the ORER bit is set to 1, the next serial reception cannot be continued.
+              </description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SCEMR</name>
+          <description>Serial Extension Mode Register (SCEMR) - The CPU can always read from or write to SCEMR. Setting the BGDM bit in this register to 1 allows the baud rate generator in this module to operate in double-speed mode when asynchronous mode is selected (by setting the C/A bit in SCSMR to 0) and an internal clock is selected as a clock source and the SCK pin is set as an input pin (by setting the CKE[1:0] bits in SCSCR to 00).</description>
+          <addressOffset>0x028</addressOffset>
+          <width>16</width>
+          <size>16</size>
+          <fields>
+            <field>
+              <name>BGDM</name>
+              <msb>7</msb><lsb>7</lsb>
+              <description>Baud Rate Generator Double-Speed Mode - When the BGDM bit is set to 1, the baud rate generator in this module operates in double-speed mode. This bit is valid only when asynchronous mode is selected by setting the C/A bit in SCSMR to 0 and an internal clock is selected as a clock source and the SCK pin is set as an input pin by setting the CKE[1:0] bits in SCSCR to 00. In other settings, use normal mode.</description>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Normal</name>
+                  <description>Normal mode</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Double</name>
+                  <description>Double-speed mode</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ABCS</name>
+              <msb>0</msb><lsb>0</lsb>
+              <description>Base Clock Select in Asynchronous Mode - This bit selects the base clock frequency within a bit period in asynchronous mode. This bit is valid only in asynchronous mode (when the C/A bit in SCSMR is 0).</description>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>16</name>
+                  <description>Base clock frequency is 16 times the bit rate</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>8</name>
+                  <description>Base clock frequency is 8 times the bit rate</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+    <!-- SC0 -->
+
+    <!-- SC1 -->
+    <peripheral derivedFrom="SC0">
+      <name>SC1</name>
+      <baseAddress>0xe8007800</baseAddress>
+      <groupName>Serial Communication Interface with FIFO</groupName>
+      <description>Serial Communication Interface with FIFO 1</description>
+    </peripheral>
+
+    <!-- SC2 -->
+    <peripheral derivedFrom="SC0">
+      <name>SC2</name>
+      <baseAddress>0xe8008000</baseAddress>
+      <groupName>Serial Communication Interface with FIFO</groupName>
+      <description>Serial Communication Interface with FIFO 2</description>
+    </peripheral>
+
+    <!-- SC3 -->
+    <peripheral derivedFrom="SC0">
+      <name>SC3</name>
+      <baseAddress>0xe8008800</baseAddress>
+      <groupName>Serial Communication Interface with FIFO</groupName>
+      <description>Serial Communication Interface with FIFO 3</description>
+    </peripheral>
+
+    <!-- SC4 -->
+    <peripheral derivedFrom="SC0">
+      <name>SC4</name>
+      <baseAddress>0xe8009000</baseAddress>
+      <groupName>Serial Communication Interface with FIFO</groupName>
+      <description>Serial Communication Interface with FIFO 4</description>
+    </peripheral>
+
+    <!-- SC5 -->
+    <peripheral derivedFrom="SC0">
+      <name>SC5</name>
+      <baseAddress>0xe8009800</baseAddress>
+      <groupName>Serial Communication Interface with FIFO</groupName>
+      <description>Serial Communication Interface with FIFO 5</description>
+    </peripheral>
+
+    <!-- SC6 -->
+    <peripheral derivedFrom="SC0">
+      <name>SC6</name>
+      <baseAddress>0xe800a000</baseAddress>
+      <groupName>Serial Communication Interface with FIFO</groupName>
+      <description>Serial Communication Interface with FIFO 6</description>
+    </peripheral>
+
+    <!-- SC7 -->
+    <peripheral derivedFrom="SC0">
+      <name>SC7</name>
+      <baseAddress>0xe800a800</baseAddress>
+      <groupName>Serial Communication Interface with FIFO</groupName>
+      <description>Serial Communication Interface with FIFO 7</description>
+    </peripheral>
   </peripherals>
 </device>

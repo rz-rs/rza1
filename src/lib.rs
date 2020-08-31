@@ -62,6 +62,144 @@ impl Deref for OSTM1 {
         unsafe { &*OSTM1::ptr() }
     }
 }
+#[doc = "Serial Communication Interface with FIFO 0"]
+pub struct SC0 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for SC0 {}
+impl SC0 {
+    #[doc = r" Returns a pointer to the register block"]
+    pub fn ptr() -> *const sc0::RegisterBlock {
+        0xe800_7000 as *const _
+    }
+}
+impl Deref for SC0 {
+    type Target = sc0::RegisterBlock;
+    fn deref(&self) -> &sc0::RegisterBlock {
+        unsafe { &*SC0::ptr() }
+    }
+}
+#[doc = "Serial Communication Interface with FIFO 0"]
+pub mod sc0;
+#[doc = "Serial Communication Interface with FIFO 1"]
+pub struct SC1 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for SC1 {}
+impl SC1 {
+    #[doc = r" Returns a pointer to the register block"]
+    pub fn ptr() -> *const sc0::RegisterBlock {
+        0xe800_7800 as *const _
+    }
+}
+impl Deref for SC1 {
+    type Target = sc0::RegisterBlock;
+    fn deref(&self) -> &sc0::RegisterBlock {
+        unsafe { &*SC1::ptr() }
+    }
+}
+#[doc = "Serial Communication Interface with FIFO 2"]
+pub struct SC2 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for SC2 {}
+impl SC2 {
+    #[doc = r" Returns a pointer to the register block"]
+    pub fn ptr() -> *const sc0::RegisterBlock {
+        0xe800_8000 as *const _
+    }
+}
+impl Deref for SC2 {
+    type Target = sc0::RegisterBlock;
+    fn deref(&self) -> &sc0::RegisterBlock {
+        unsafe { &*SC2::ptr() }
+    }
+}
+#[doc = "Serial Communication Interface with FIFO 3"]
+pub struct SC3 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for SC3 {}
+impl SC3 {
+    #[doc = r" Returns a pointer to the register block"]
+    pub fn ptr() -> *const sc0::RegisterBlock {
+        0xe800_8800 as *const _
+    }
+}
+impl Deref for SC3 {
+    type Target = sc0::RegisterBlock;
+    fn deref(&self) -> &sc0::RegisterBlock {
+        unsafe { &*SC3::ptr() }
+    }
+}
+#[doc = "Serial Communication Interface with FIFO 4"]
+pub struct SC4 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for SC4 {}
+impl SC4 {
+    #[doc = r" Returns a pointer to the register block"]
+    pub fn ptr() -> *const sc0::RegisterBlock {
+        0xe800_9000 as *const _
+    }
+}
+impl Deref for SC4 {
+    type Target = sc0::RegisterBlock;
+    fn deref(&self) -> &sc0::RegisterBlock {
+        unsafe { &*SC4::ptr() }
+    }
+}
+#[doc = "Serial Communication Interface with FIFO 5"]
+pub struct SC5 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for SC5 {}
+impl SC5 {
+    #[doc = r" Returns a pointer to the register block"]
+    pub fn ptr() -> *const sc0::RegisterBlock {
+        0xe800_9800 as *const _
+    }
+}
+impl Deref for SC5 {
+    type Target = sc0::RegisterBlock;
+    fn deref(&self) -> &sc0::RegisterBlock {
+        unsafe { &*SC5::ptr() }
+    }
+}
+#[doc = "Serial Communication Interface with FIFO 6"]
+pub struct SC6 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for SC6 {}
+impl SC6 {
+    #[doc = r" Returns a pointer to the register block"]
+    pub fn ptr() -> *const sc0::RegisterBlock {
+        0xe800_a000 as *const _
+    }
+}
+impl Deref for SC6 {
+    type Target = sc0::RegisterBlock;
+    fn deref(&self) -> &sc0::RegisterBlock {
+        unsafe { &*SC6::ptr() }
+    }
+}
+#[doc = "Serial Communication Interface with FIFO 7"]
+pub struct SC7 {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for SC7 {}
+impl SC7 {
+    #[doc = r" Returns a pointer to the register block"]
+    pub fn ptr() -> *const sc0::RegisterBlock {
+        0xe800_a800 as *const _
+    }
+}
+impl Deref for SC7 {
+    type Target = sc0::RegisterBlock;
+    fn deref(&self) -> &sc0::RegisterBlock {
+        unsafe { &*SC7::ptr() }
+    }
+}
 #[allow(renamed_and_removed_lints)]
 #[allow(private_no_mangle_statics)]
 #[no_mangle]
@@ -75,6 +213,22 @@ pub struct Peripherals {
     pub OSTM0: OSTM0,
     #[doc = "OSTM1"]
     pub OSTM1: OSTM1,
+    #[doc = "SC0"]
+    pub SC0: SC0,
+    #[doc = "SC1"]
+    pub SC1: SC1,
+    #[doc = "SC2"]
+    pub SC2: SC2,
+    #[doc = "SC3"]
+    pub SC3: SC3,
+    #[doc = "SC4"]
+    pub SC4: SC4,
+    #[doc = "SC5"]
+    pub SC5: SC5,
+    #[doc = "SC6"]
+    pub SC6: SC6,
+    #[doc = "SC7"]
+    pub SC7: SC7,
 }
 impl Peripherals {
     #[doc = r" Unchecked version of `Peripherals::take`"]
@@ -89,6 +243,30 @@ impl Peripherals {
                 _marker: PhantomData,
             },
             OSTM1: OSTM1 {
+                _marker: PhantomData,
+            },
+            SC0: SC0 {
+                _marker: PhantomData,
+            },
+            SC1: SC1 {
+                _marker: PhantomData,
+            },
+            SC2: SC2 {
+                _marker: PhantomData,
+            },
+            SC3: SC3 {
+                _marker: PhantomData,
+            },
+            SC4: SC4 {
+                _marker: PhantomData,
+            },
+            SC5: SC5 {
+                _marker: PhantomData,
+            },
+            SC6: SC6 {
+                _marker: PhantomData,
+            },
+            SC7: SC7 {
                 _marker: PhantomData,
             },
         }
