@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<device schemaVersion="1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="CMSIS-SVD.xsd" >
+  <vendor>Renesas</vendor>
+  <name>RZ/A1H</name>
+
+  <addressUnitBits>8</addressUnitBits>
+  <width>32</width>
+  <size>32</size>
+  <access>read-write</access>
+  <resetValue>0x00000000</resetValue>
+  <resetMask>0xFFFFFFFF</resetMask>
+
+  <peripherals>
+    <!-- ICTL -->
+    <peripheral>
+      <name>ICTL</name>
+      <baseAddress>0xfcfef800</baseAddress>
+      <groupName>Interrupt Controller</groupName>
+      <description>Interrupt controller (chip-specific registers)</description>
+      <registers>
+        <register>
+          <name>ICR0</name>
+          <description>Interrupt Control Register 0</description>
+          <addressOffset>0x000</addressOffset>
+          <width>16</width>
+          <size>16</size>
+          <fields>
+            <field>
+              <name>NMIL</name>
+              <msb>15</msb><lsb>15</lsb>
+              <access>read-only</access>
+              <description>NMI Input Level - Sets the level of the signal input at the NMI pin. The NMI pin level can be obtained by reading this bit. This bit cannot be modified.</description>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Low</name>
+                  <description>Low level is input to NMI pin</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>High</name>
+                  <description>High level is input to NMI pin</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>NMIE</name>
+              <msb>8</msb><lsb>8</lsb>
+              <description>NMI Edge Select - Selects whether the falling or rising edge of the interrupt request signal on the NMI pin is detected.</description>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>FallingEdge</name>
+                  <description>Interrupt request is detected on falling edge of NMI input</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>RisingEdge</name>
+                  <description>Interrupt request is detected on rising edge of NMI input</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>NMIF</name>
+              <msb>1</msb><lsb>1</lsb>
+              <description>NMI Interrupt Request - This bit indicates the status of the NMI interrupt request. This bit cannot be modified.
+
+              0: NMI interrupt request has not occurred
+              [Clearing conditions]
+              - Cleared by changing NMIE of ICR0
+              - Cleared by reading NMIF while NMIF = 1, then writing 0 to NMIF
+
+              1: NMI interrupt request is detected
+              [Setting condition]
+              - Edge corresponding to NMIE of ICR0 has occurred at NMI pin</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ICR1</name>
+          <description>IRQ Sense Select - These bits select whether interrupt signals corresponding to pins IRQ7 to IRQ0 are detected by a low level, falling edge, rising edge, or both edges.
+
+          - 00: Interrupt request is detected on low level of IRQn input
+          - 01: Interrupt request is detected on falling edge of IRQn input
+          - 10: Interrupt request is detected on rising edge of IRQn input
+          - 11: Interrupt request is detected on both edges of IRQn input
+          </description>
+          <addressOffset>0x002</addressOffset>
+          <width>16</width>
+          <size>16</size>
+          <fields>
+            <field><name>IRQ00S</name><lsb>0</lsb><msb>0</msb></field>
+            <field><name>IRQ01S</name><lsb>1</lsb><msb>1</msb></field>
+            <field><name>IRQ10S</name><lsb>2</lsb><msb>2</msb></field>
+            <field><name>IRQ11S</name><lsb>3</lsb><msb>3</msb></field>
+            <field><name>IRQ20S</name><lsb>4</lsb><msb>4</msb></field>
+            <field><name>IRQ21S</name><lsb>5</lsb><msb>5</msb></field>
+            <field><name>IRQ30S</name><lsb>6</lsb><msb>6</msb></field>
+            <field><name>IRQ31S</name><lsb>7</lsb><msb>7</msb></field>
+            <field><name>IRQ40S</name><lsb>8</lsb><msb>8</msb></field>
+            <field><name>IRQ41S</name><lsb>9</lsb><msb>9</msb></field>
+            <field><name>IRQ50S</name><lsb>10</lsb><msb>10</msb></field>
+            <field><name>IRQ51S</name><lsb>11</lsb><msb>11</msb></field>
+            <field><name>IRQ60S</name><lsb>12</lsb><msb>12</msb></field>
+            <field><name>IRQ61S</name><lsb>13</lsb><msb>13</msb></field>
+            <field><name>IRQ70S</name><lsb>14</lsb><msb>14</msb></field>
+            <field><name>IRQ71S</name><lsb>15</lsb><msb>15</msb></field>
+          </fields>
+        </register>
+        <register>
+          <name>IRQRR</name>
+          <description>IRQ Interrupt Request Register (IRQRR) - IRQRR is a 16-bit register that indicates interrupt requests from external input pins IRQ7 to IRQ0. If edge detection is set for the IRQ7 to IRQ0 interrupts, writing 0 to the IRQ7F to IRQ0F bits after reading IRQ7F to IRQ0F = 1 cancels the retained interrupts.</description>
+          <addressOffset>0x004</addressOffset>
+          <width>16</width>
+          <size>16</size>
+          <fields>
+            <field><name>IRQ0F</name><lsb>0</lsb><msb>0</msb></field>
+            <field><name>IRQ1F</name><lsb>1</lsb><msb>1</msb></field>
+            <field><name>IRQ2F</name><lsb>2</lsb><msb>2</msb></field>
+            <field><name>IRQ3F</name><lsb>3</lsb><msb>3</msb></field>
+            <field><name>IRQ4F</name><lsb>4</lsb><msb>4</msb></field>
+            <field><name>IRQ5F</name><lsb>5</lsb><msb>5</msb></field>
+            <field><name>IRQ6F</name><lsb>6</lsb><msb>6</msb></field>
+            <field><name>IRQ7F</name><lsb>7</lsb><msb>7</msb></field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+    <!-- ICTL -->
+
+    <!-- ICD -->
+    <peripheral>
+      <name>ICD</name>
+      <baseAddress>0xe8201000</baseAddress>
+      <groupName>Interrupt Controller</groupName>
+      <description>Interrupt controller - PL390 distributor</description>
+      <!-- TODO! -->
+    </peripheral>
+    <!-- ICD -->
+
+    <!-- ICC -->
+    <peripheral>
+      <name>ICC</name>
+      <baseAddress>0xe8202000</baseAddress>
+      <groupName>Interrupt Controller</groupName>
+      <description>Interrupt controller - PL390 CPU interface 0</description>
+      <!-- TODO! -->
+    </peripheral>
+    <!-- ICC -->
+
+    <!-- OSTM0 -->
+    <peripheral>
+      <name>OSTM0</name>
+      <baseAddress>0xfcfec000</baseAddress>
+      <groupName>OS Timer</groupName>
+      <description>OS Timer 0</description>
+      <registers>
+        <register>
+          <name>CMP</name>
+          <description>Compare Register - Depending on the mode of operation, this register holds the start value for the down-counter or the value for comparison with that of the counter.</description>
+          <addressOffset>0x000</addressOffset>
+        </register>
+        <register>
+          <name>CNT</name>
+          <description>Counter Register - This register indicates the counter value of the timer.</description>
+          <addressOffset>0x004</addressOffset>
+          <access>read-only</access>
+        </register>
+        <register>
+          <name>TE</name>
+          <description>Count Enable Status Register - This register indicates whether the counter is enabled or disabled.</description>
+          <addressOffset>0x010</addressOffset>
+          <width>8</width>
+          <size>8</size>
+          <access>read-only</access>
+          <fields>
+            <field>
+              <name>TE</name>
+              <msb>0</msb><lsb>0</lsb>
+              <description>
+                This bit indicates whether the counter is enabled or disabled.
+
+                - 0: Counter disabled
+                - 1: Counter enabled
+
+                This bit is set to 1 in response to OSTMnTS.OSTMnTS being set to 1. This bit is reset to 0 in response to OSTMnTT.OSTMnTT being set to 1.
+              </description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TS</name>
+          <description>Count Start Trigger Register - This register starts the counter.</description>
+          <addressOffset>0x014</addressOffset>
+          <width>8</width>
+          <size>8</size>
+          <access>write-only</access>
+          <fields>
+            <field>
+              <name>TS</name>
+              <msb>0</msb><lsb>0</lsb>
+              <description>
+                This bit starts the counter.
+
+                 - 0: This setting has no effect.
+                 - 1: Starts the counter and sets OSTMnTE.OSTMnTE = 1.
+
+                In interval timer mode, a forced restart is executed if this bit is set while OSTMnTE.OSTMnTE = 1.
+                In free-running comparison mode, setting this bit is ignored as long as OSTMnTE.OSTMnTE = 1.
+              </description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TT</name>
+          <description>Count Stop Trigger Register - This register stops the counter.</description>
+          <addressOffset>0x018</addressOffset>
+          <width>8</width>
+          <size>8</size>
+          <access>write-only</access>
+          <fields>
+            <field>
+              <name>TT</name>
+              <msb>0</msb><lsb>0</lsb>
+              <description>
+                Stops the counter.
+
+                 - 0: This setting has no effect.
+                 - 1: Stops the counter and clears the OSTMnTE.OSTMnTE bit.
+              </description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CTL</name>
+          <description>Control Register - This register specifies the operating mode for the counter and controls enabling/disabling of OSTMnTINT interrupt requests when counting starts.</description>
+          <addressOffset>0x020</addressOffset>
+          <width>16</width>
+          <size>16</size>
+          <fields>
+            <field>
+              <name>MD0</name>
+              <msb>0</msb><lsb>0</lsb>
+              <description>Controls enabling/disabling of OSTMnTINT interrupt requests when counting starts.</description>
+            </field>
+            <field>
+              <name>MD1</name>
+              <msb>1</msb><lsb>1</lsb>
+              <description>Specifies the operating mode for the counter.</description>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>IntervalTimer</name>
+                  <description>Interval timer mode</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>FreeRunningComparison</name>
+                  <description>Free-running comparison mode</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+    <!-- OSTM0 -->
+
+    <!-- OSTM1 -->
+    <peripheral derivedFrom="OSTM0">
+      <name>OSTM1</name>
+      <baseAddress>0xfcfec400</baseAddress>
+      <groupName>OS Timer</groupName>
+      <description>OS Timer 1</description>
+    </peripheral>
+    <!-- OSTM1 -->
+  </peripherals>
+</device>
