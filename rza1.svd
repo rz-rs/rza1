@@ -1009,5 +1009,670 @@
       <groupName>Serial Communication Interface with FIFO</groupName>
       <description>Serial Communication Interface with FIFO 7</description>
     </peripheral>
+
+    <!-- PORT -->
+    <peripheral>
+      <name>PORT</name>
+      <baseAddress>0xfcfe3000</baseAddress>
+      <groupName>Ports</groupName>
+      <description>General ports</description>
+      <registers>
+        <register>
+          <name>P%s</name>
+          <description>Port Register (Pn) - In output port mode (PMCn.PMCnm = 0 and PMn.PMnm = 0), this register holds the Pn.Pnm data to be output via the Pn_m pin.</description>
+          <addressOffset>0x000</addressOffset>
+          <width>16</width>
+          <size>16</size>
+          <dim>12</dim> <!-- RZ/A1H 324-pin (P0–P11)  -->
+          <dimIncrement>4</dimIncrement>
+          <fields>
+            <field><name>0</name><lsb>0</lsb><msb>0</msb></field>
+            <field><name>1</name><lsb>1</lsb><msb>1</msb></field>
+            <field><name>2</name><lsb>2</lsb><msb>2</msb></field>
+            <field><name>3</name><lsb>3</lsb><msb>3</msb></field>
+            <field><name>4</name><lsb>4</lsb><msb>4</msb></field>
+            <field><name>5</name><lsb>5</lsb><msb>5</msb></field>
+            <field><name>6</name><lsb>6</lsb><msb>6</msb></field>
+            <field><name>7</name><lsb>7</lsb><msb>7</msb></field>
+            <field><name>8</name><lsb>8</lsb><msb>8</msb></field>
+            <field><name>9</name><lsb>9</lsb><msb>9</msb></field>
+            <field><name>10</name><lsb>10</lsb><msb>10</msb></field>
+            <field><name>11</name><lsb>11</lsb><msb>11</msb></field>
+            <field><name>12</name><lsb>12</lsb><msb>12</msb></field>
+            <field><name>13</name><lsb>13</lsb><msb>13</msb></field>
+            <field><name>14</name><lsb>14</lsb><msb>14</msb></field>
+            <field><name>15</name><lsb>15</lsb><msb>15</msb></field>
+          </fields>
+        </register>
+        <register>
+          <name>PSR%s</name>
+          <description>Port Set and Reset Register (PSRn) - This register provides an alternative method for writing data to the Pn register. The higher 16 bits of the PSRn register specify whether data can be written to the Pn.Pnm bit specified by the lower 16 bits of the PSRn register. When reading, the higher 16 bits are read as 0000H. The lower 16 bits are read as the value of the Pn register.</description>
+          <addressOffset>0x100</addressOffset>
+          <width>32</width>
+          <size>32</size>
+          <dim>12</dim> <!-- RZ/A1H 324-pin (P0–P11)  -->
+          <dimIncrement>4</dimIncrement>
+          <fields>
+            <field><name>0</name><lsb>0</lsb><msb>0</msb></field>
+            <field><name>1</name><lsb>1</lsb><msb>1</msb></field>
+            <field><name>2</name><lsb>2</lsb><msb>2</msb></field>
+            <field><name>3</name><lsb>3</lsb><msb>3</msb></field>
+            <field><name>4</name><lsb>4</lsb><msb>4</msb></field>
+            <field><name>5</name><lsb>5</lsb><msb>5</msb></field>
+            <field><name>6</name><lsb>6</lsb><msb>6</msb></field>
+            <field><name>7</name><lsb>7</lsb><msb>7</msb></field>
+            <field><name>8</name><lsb>8</lsb><msb>8</msb></field>
+            <field><name>9</name><lsb>9</lsb><msb>9</msb></field>
+            <field><name>10</name><lsb>10</lsb><msb>10</msb></field>
+            <field><name>11</name><lsb>11</lsb><msb>11</msb></field>
+            <field><name>12</name><lsb>12</lsb><msb>12</msb></field>
+            <field><name>13</name><lsb>13</lsb><msb>13</msb></field>
+            <field><name>14</name><lsb>14</lsb><msb>14</msb></field>
+            <field><name>15</name><lsb>15</lsb><msb>15</msb></field>
+            <field><name>enable_0</name><lsb>16</lsb><msb>16</msb></field>
+            <field><name>enable_1</name><lsb>17</lsb><msb>17</msb></field>
+            <field><name>enable_2</name><lsb>18</lsb><msb>18</msb></field>
+            <field><name>enable_3</name><lsb>19</lsb><msb>19</msb></field>
+            <field><name>enable_4</name><lsb>20</lsb><msb>20</msb></field>
+            <field><name>enable_5</name><lsb>21</lsb><msb>21</msb></field>
+            <field><name>enable_6</name><lsb>22</lsb><msb>22</msb></field>
+            <field><name>enable_7</name><lsb>23</lsb><msb>23</msb></field>
+            <field><name>enable_8</name><lsb>24</lsb><msb>24</msb></field>
+            <field><name>enable_9</name><lsb>25</lsb><msb>25</msb></field>
+            <field><name>enable_10</name><lsb>26</lsb><msb>26</msb></field>
+            <field><name>enable_11</name><lsb>27</lsb><msb>27</msb></field>
+            <field><name>enable_12</name><lsb>28</lsb><msb>28</msb></field>
+            <field><name>enable_13</name><lsb>29</lsb><msb>29</msb></field>
+            <field><name>enable_14</name><lsb>30</lsb><msb>30</msb></field>
+            <field><name>enable_15</name><lsb>31</lsb><msb>31</msb></field>
+          </fields>
+        </register>
+        <register>
+          <name>PPR%s</name>
+          <description>Port Pin Read Register (PPRn/JPPR0) - The PPRn register reflects either the level of the Pn_m pin, the value of the Pn.Pnm bit, or the output level of the alternative function. The value read depends on various register settings as described in Table 54.4, PPRnm Read Values.</description>
+          <addressOffset>0x200</addressOffset>
+          <width>16</width>
+          <size>16</size>
+          <dim>12</dim> <!-- RZ/A1H 324-pin (P0–P11)  -->
+          <dimIncrement>4</dimIncrement>
+          <access>read-only</access>
+          <fields>
+            <field><name>0</name><lsb>0</lsb><msb>0</msb></field>
+            <field><name>1</name><lsb>1</lsb><msb>1</msb></field>
+            <field><name>2</name><lsb>2</lsb><msb>2</msb></field>
+            <field><name>3</name><lsb>3</lsb><msb>3</msb></field>
+            <field><name>4</name><lsb>4</lsb><msb>4</msb></field>
+            <field><name>5</name><lsb>5</lsb><msb>5</msb></field>
+            <field><name>6</name><lsb>6</lsb><msb>6</msb></field>
+            <field><name>7</name><lsb>7</lsb><msb>7</msb></field>
+            <field><name>8</name><lsb>8</lsb><msb>8</msb></field>
+            <field><name>9</name><lsb>9</lsb><msb>9</msb></field>
+            <field><name>10</name><lsb>10</lsb><msb>10</msb></field>
+            <field><name>11</name><lsb>11</lsb><msb>11</msb></field>
+            <field><name>12</name><lsb>12</lsb><msb>12</msb></field>
+            <field><name>13</name><lsb>13</lsb><msb>13</msb></field>
+            <field><name>14</name><lsb>14</lsb><msb>14</msb></field>
+            <field><name>15</name><lsb>15</lsb><msb>15</msb></field>
+          </fields>
+        </register>
+        <register>
+          <name>PM%s</name>
+          <description>Port Mode Register (PMn) - The PMn register specifies whether the Pn_m pins are in input mode or in output mode.</description>
+          <addressOffset>0x300</addressOffset>
+          <width>16</width>
+          <size>16</size>
+          <dim>12</dim> <!-- RZ/A1H 324-pin (P0–P11)  -->
+          <dimIncrement>4</dimIncrement>
+          <fields>
+            <field>
+              <name>0</name><lsb>0</lsb><msb>0</msb>
+              <enumeratedValues>
+                <name>PM</name>
+                <enumeratedValue><name>OUTPUT</name><value>0</value></enumeratedValue>
+                <enumeratedValue><name>INPUT</name><value>1</value></enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field><name>1</name><lsb>1</lsb><msb>1</msb>
+              <enumeratedValues derivedFrom="PM" /></field>
+            <field><name>2</name><lsb>2</lsb><msb>2</msb>
+              <enumeratedValues derivedFrom="PM" /></field>
+            <field><name>3</name><lsb>3</lsb><msb>3</msb>
+              <enumeratedValues derivedFrom="PM" /></field>
+            <field><name>4</name><lsb>4</lsb><msb>4</msb>
+              <enumeratedValues derivedFrom="PM" /></field>
+            <field><name>5</name><lsb>5</lsb><msb>5</msb>
+              <enumeratedValues derivedFrom="PM" /></field>
+            <field><name>6</name><lsb>6</lsb><msb>6</msb>
+              <enumeratedValues derivedFrom="PM" /></field>
+            <field><name>7</name><lsb>7</lsb><msb>7</msb>
+              <enumeratedValues derivedFrom="PM" /></field>
+            <field><name>8</name><lsb>8</lsb><msb>8</msb>
+              <enumeratedValues derivedFrom="PM" /></field>
+            <field><name>9</name><lsb>9</lsb><msb>9</msb>
+              <enumeratedValues derivedFrom="PM" /></field>
+            <field><name>10</name><lsb>10</lsb><msb>10</msb>
+              <enumeratedValues derivedFrom="PM" /></field>
+            <field><name>11</name><lsb>11</lsb><msb>11</msb>
+              <enumeratedValues derivedFrom="PM" /></field>
+            <field><name>12</name><lsb>12</lsb><msb>12</msb>
+              <enumeratedValues derivedFrom="PM" /></field>
+            <field><name>13</name><lsb>13</lsb><msb>13</msb>
+              <enumeratedValues derivedFrom="PM" /></field>
+            <field><name>14</name><lsb>14</lsb><msb>14</msb>
+              <enumeratedValues derivedFrom="PM" /></field>
+            <field><name>15</name><lsb>15</lsb><msb>15</msb>
+              <enumeratedValues derivedFrom="PM" /></field>
+          </fields>
+        </register>
+        <register>
+          <name>PMC%s</name>
+          <description>
+            Port Mode Control Register (PMCn/JPMC0) - This register is used to specify whether the Pn_m pins are in port mode or in alternative mode.
+
+            Caution: The input/output control is not performed just by setting alternative mode (PMCn.PMCnm). Set 1 in the PIPCn.PIPCnm bit too when the I/O control is to be performed by using the alternative function.
+          </description>
+          <addressOffset>0x400</addressOffset>
+          <width>16</width>
+          <size>16</size>
+          <dim>12</dim> <!-- RZ/A1H 324-pin (P0–P11)  -->
+          <dimIncrement>4</dimIncrement>
+          <fields>
+            <field>
+              <name>0</name><lsb>0</lsb><msb>0</msb>
+              <enumeratedValues>
+                <name>PMC</name>
+                <enumeratedValue><name>PORT</name><value>0</value></enumeratedValue>
+                <enumeratedValue><name>ALT</name><value>1</value></enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field><name>1</name><lsb>1</lsb><msb>1</msb>
+              <enumeratedValues derivedFrom="PMC" /></field>
+            <field><name>2</name><lsb>2</lsb><msb>2</msb>
+              <enumeratedValues derivedFrom="PMC" /></field>
+            <field><name>3</name><lsb>3</lsb><msb>3</msb>
+              <enumeratedValues derivedFrom="PMC" /></field>
+            <field><name>4</name><lsb>4</lsb><msb>4</msb>
+              <enumeratedValues derivedFrom="PMC" /></field>
+            <field><name>5</name><lsb>5</lsb><msb>5</msb>
+              <enumeratedValues derivedFrom="PMC" /></field>
+            <field><name>6</name><lsb>6</lsb><msb>6</msb>
+              <enumeratedValues derivedFrom="PMC" /></field>
+            <field><name>7</name><lsb>7</lsb><msb>7</msb>
+              <enumeratedValues derivedFrom="PMC" /></field>
+            <field><name>8</name><lsb>8</lsb><msb>8</msb>
+              <enumeratedValues derivedFrom="PMC" /></field>
+            <field><name>9</name><lsb>9</lsb><msb>9</msb>
+              <enumeratedValues derivedFrom="PMC" /></field>
+            <field><name>10</name><lsb>10</lsb><msb>10</msb>
+              <enumeratedValues derivedFrom="PMC" /></field>
+            <field><name>11</name><lsb>11</lsb><msb>11</msb>
+              <enumeratedValues derivedFrom="PMC" /></field>
+            <field><name>12</name><lsb>12</lsb><msb>12</msb>
+              <enumeratedValues derivedFrom="PMC" /></field>
+            <field><name>13</name><lsb>13</lsb><msb>13</msb>
+              <enumeratedValues derivedFrom="PMC" /></field>
+            <field><name>14</name><lsb>14</lsb><msb>14</msb>
+              <enumeratedValues derivedFrom="PMC" /></field>
+            <field><name>15</name><lsb>15</lsb><msb>15</msb>
+              <enumeratedValues derivedFrom="PMC" /></field>
+          </fields>
+        </register>
+        <register>
+          <name>PFC%s</name>
+          <description>Port Function Control Register (PFCn) - This register, together with the PFCEn and PFCAEn register, specifies the alternative function of the pins. The I/O direction of several alternative functions can be controlled directly by using the Pn_m pin. For these alternative functions, the PIPCn.PIPCnm bit must be set to 1. For all other alternative functions, the I/O direction is specified by using the PMn.PMnm bit.</description>
+          <addressOffset>0x500</addressOffset>
+          <width>16</width>
+          <size>16</size>
+          <dim>12</dim> <!-- RZ/A1H 324-pin (P0–P11)  -->
+          <dimIncrement>4</dimIncrement>
+          <fields>
+            <field><name>0</name><lsb>0</lsb><msb>0</msb></field>
+            <field><name>1</name><lsb>1</lsb><msb>1</msb></field>
+            <field><name>2</name><lsb>2</lsb><msb>2</msb></field>
+            <field><name>3</name><lsb>3</lsb><msb>3</msb></field>
+            <field><name>4</name><lsb>4</lsb><msb>4</msb></field>
+            <field><name>5</name><lsb>5</lsb><msb>5</msb></field>
+            <field><name>6</name><lsb>6</lsb><msb>6</msb></field>
+            <field><name>7</name><lsb>7</lsb><msb>7</msb></field>
+            <field><name>8</name><lsb>8</lsb><msb>8</msb></field>
+            <field><name>9</name><lsb>9</lsb><msb>9</msb></field>
+            <field><name>10</name><lsb>10</lsb><msb>10</msb></field>
+            <field><name>11</name><lsb>11</lsb><msb>11</msb></field>
+            <field><name>12</name><lsb>12</lsb><msb>12</msb></field>
+            <field><name>13</name><lsb>13</lsb><msb>13</msb></field>
+            <field><name>14</name><lsb>14</lsb><msb>14</msb></field>
+            <field><name>15</name><lsb>15</lsb><msb>15</msb></field>
+          </fields>
+        </register>
+        <register>
+          <name>PFCE%s</name>
+          <description>Port Function Control Expansion Register (PFCEn) This register, together with the PFCn and PFCAEn register, specifies the alternative function of the pins. The I/O direction of several alternative functions can be controlled directly by using the Pn_m pin. For these alternative functions, the PIPCn.PIPCnm bit must be set to 1. For all other alternative functions, the I/O direction is specified by using the PMn.PMnm bit.</description>
+          <addressOffset>0x600</addressOffset>
+          <width>16</width>
+          <size>16</size>
+          <dim>12</dim> <!-- RZ/A1H 324-pin (P0–P11)  -->
+          <dimIncrement>4</dimIncrement>
+          <fields>
+            <field><name>0</name><lsb>0</lsb><msb>0</msb></field>
+            <field><name>1</name><lsb>1</lsb><msb>1</msb></field>
+            <field><name>2</name><lsb>2</lsb><msb>2</msb></field>
+            <field><name>3</name><lsb>3</lsb><msb>3</msb></field>
+            <field><name>4</name><lsb>4</lsb><msb>4</msb></field>
+            <field><name>5</name><lsb>5</lsb><msb>5</msb></field>
+            <field><name>6</name><lsb>6</lsb><msb>6</msb></field>
+            <field><name>7</name><lsb>7</lsb><msb>7</msb></field>
+            <field><name>8</name><lsb>8</lsb><msb>8</msb></field>
+            <field><name>9</name><lsb>9</lsb><msb>9</msb></field>
+            <field><name>10</name><lsb>10</lsb><msb>10</msb></field>
+            <field><name>11</name><lsb>11</lsb><msb>11</msb></field>
+            <field><name>12</name><lsb>12</lsb><msb>12</msb></field>
+            <field><name>13</name><lsb>13</lsb><msb>13</msb></field>
+            <field><name>14</name><lsb>14</lsb><msb>14</msb></field>
+            <field><name>15</name><lsb>15</lsb><msb>15</msb></field>
+          </fields>
+        </register>
+        <register>
+          <name>PNOT%s</name>
+          <description>Port NOT Register (PNOTn) - This register allows a Pn.Pnm bit to be inverted without directly writing to the Pn register.</description>
+          <addressOffset>0x700</addressOffset>
+          <width>16</width>
+          <size>16</size>
+          <dim>12</dim> <!-- RZ/A1H 324-pin (P0–P11)  -->
+          <dimIncrement>4</dimIncrement>
+          <access>write-only</access>
+          <fields>
+            <field><name>0</name><lsb>0</lsb><msb>0</msb></field>
+            <field><name>1</name><lsb>1</lsb><msb>1</msb></field>
+            <field><name>2</name><lsb>2</lsb><msb>2</msb></field>
+            <field><name>3</name><lsb>3</lsb><msb>3</msb></field>
+            <field><name>4</name><lsb>4</lsb><msb>4</msb></field>
+            <field><name>5</name><lsb>5</lsb><msb>5</msb></field>
+            <field><name>6</name><lsb>6</lsb><msb>6</msb></field>
+            <field><name>7</name><lsb>7</lsb><msb>7</msb></field>
+            <field><name>8</name><lsb>8</lsb><msb>8</msb></field>
+            <field><name>9</name><lsb>9</lsb><msb>9</msb></field>
+            <field><name>10</name><lsb>10</lsb><msb>10</msb></field>
+            <field><name>11</name><lsb>11</lsb><msb>11</msb></field>
+            <field><name>12</name><lsb>12</lsb><msb>12</msb></field>
+            <field><name>13</name><lsb>13</lsb><msb>13</msb></field>
+            <field><name>14</name><lsb>14</lsb><msb>14</msb></field>
+            <field><name>15</name><lsb>15</lsb><msb>15</msb></field>
+          </fields>
+        </register>
+        <register>
+          <name>PMSR%s</name>
+          <description>Port Mode Set and Reset Register (PMSRn) - This register provides an alternative method for writing data to the PMn register. The higher 16 bits of the PMSRn register specify whether data can be written to the PMn.PMnm bit specified by the lower 16 bits of the PMSRn register. When reading, the higher 16 bits are read as 0000H. The lower 16 bits are read as the value of the PMn register.</description>
+          <addressOffset>0x800</addressOffset>
+          <width>32</width>
+          <size>32</size>
+          <dim>12</dim> <!-- RZ/A1H 324-pin (P0–P11)  -->
+          <dimIncrement>4</dimIncrement>
+          <fields>
+            <field><name>0</name><lsb>0</lsb><msb>0</msb>
+              <enumeratedValues>
+                <name>PM</name>
+                <enumeratedValue><name>OUTPUT</name><value>0</value></enumeratedValue>
+                <enumeratedValue><name>INPUT</name><value>1</value></enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field><name>1</name><lsb>1</lsb><msb>1</msb>
+              <!-- FIXME: `derivedFrom="PM%s.0.PM"` produces broken Rust code -->
+              <enumeratedValues derivedFrom="PM" /></field>
+            <field><name>2</name><lsb>2</lsb><msb>2</msb>
+              <enumeratedValues derivedFrom="PM" /></field>
+            <field><name>3</name><lsb>3</lsb><msb>3</msb>
+              <enumeratedValues derivedFrom="PM" /></field>
+            <field><name>4</name><lsb>4</lsb><msb>4</msb>
+              <enumeratedValues derivedFrom="PM" /></field>
+            <field><name>5</name><lsb>5</lsb><msb>5</msb>
+              <enumeratedValues derivedFrom="PM" /></field>
+            <field><name>6</name><lsb>6</lsb><msb>6</msb>
+              <enumeratedValues derivedFrom="PM" /></field>
+            <field><name>7</name><lsb>7</lsb><msb>7</msb>
+              <enumeratedValues derivedFrom="PM" /></field>
+            <field><name>8</name><lsb>8</lsb><msb>8</msb>
+              <enumeratedValues derivedFrom="PM" /></field>
+            <field><name>9</name><lsb>9</lsb><msb>9</msb>
+              <enumeratedValues derivedFrom="PM" /></field>
+            <field><name>10</name><lsb>10</lsb><msb>10</msb>
+              <enumeratedValues derivedFrom="PM" /></field>
+            <field><name>11</name><lsb>11</lsb><msb>11</msb>
+              <enumeratedValues derivedFrom="PM" /></field>
+            <field><name>12</name><lsb>12</lsb><msb>12</msb>
+              <enumeratedValues derivedFrom="PM" /></field>
+            <field><name>13</name><lsb>13</lsb><msb>13</msb>
+              <enumeratedValues derivedFrom="PM" /></field>
+            <field><name>14</name><lsb>14</lsb><msb>14</msb>
+              <enumeratedValues derivedFrom="PM" /></field>
+            <field><name>15</name><lsb>15</lsb><msb>15</msb>
+              <enumeratedValues derivedFrom="PM" /></field>
+            <field><name>enable_0</name><lsb>16</lsb><msb>16</msb></field>
+            <field><name>enable_1</name><lsb>17</lsb><msb>17</msb></field>
+            <field><name>enable_2</name><lsb>18</lsb><msb>18</msb></field>
+            <field><name>enable_3</name><lsb>19</lsb><msb>19</msb></field>
+            <field><name>enable_4</name><lsb>20</lsb><msb>20</msb></field>
+            <field><name>enable_5</name><lsb>21</lsb><msb>21</msb></field>
+            <field><name>enable_6</name><lsb>22</lsb><msb>22</msb></field>
+            <field><name>enable_7</name><lsb>23</lsb><msb>23</msb></field>
+            <field><name>enable_8</name><lsb>24</lsb><msb>24</msb></field>
+            <field><name>enable_9</name><lsb>25</lsb><msb>25</msb></field>
+            <field><name>enable_10</name><lsb>26</lsb><msb>26</msb></field>
+            <field><name>enable_11</name><lsb>27</lsb><msb>27</msb></field>
+            <field><name>enable_12</name><lsb>28</lsb><msb>28</msb></field>
+            <field><name>enable_13</name><lsb>29</lsb><msb>29</msb></field>
+            <field><name>enable_14</name><lsb>30</lsb><msb>30</msb></field>
+            <field><name>enable_15</name><lsb>31</lsb><msb>31</msb></field>
+          </fields>
+        </register>
+        <register>
+          <name>PMCSR%s</name>
+          <description>Port Mode Control Set and Reset Register (PMCSRn/JPMCSR0) - This register provides an alternative method for writing data to the PMCn register. The higher bits of the PMCSRn register specify whether data can be written to the PMCn.PMCnm bit specified by the lower bits of the PMCSRn register. When reading, the higher 16 bits are read as 0000H. The lower 16 bits are read as the value of the PMCn register.</description>
+          <addressOffset>0x900</addressOffset>
+          <width>32</width>
+          <size>32</size>
+          <dim>12</dim> <!-- RZ/A1H 324-pin (P0–P11)  -->
+          <dimIncrement>4</dimIncrement>
+          <fields>
+            <field><name>0</name><lsb>0</lsb><msb>0</msb>
+              <enumeratedValues>
+                <name>PMC</name>
+                <enumeratedValue><name>PORT</name><value>0</value></enumeratedValue>
+                <enumeratedValue><name>ALT</name><value>1</value></enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field><name>1</name><lsb>1</lsb><msb>1</msb>
+              <!-- FIXME: `derivedFrom="PMC%s.0.PMC"` produces broken Rust code -->
+              <enumeratedValues derivedFrom="PMC" /></field>
+            <field><name>2</name><lsb>2</lsb><msb>2</msb>
+              <enumeratedValues derivedFrom="PMC" /></field>
+            <field><name>3</name><lsb>3</lsb><msb>3</msb>
+              <enumeratedValues derivedFrom="PMC" /></field>
+            <field><name>4</name><lsb>4</lsb><msb>4</msb>
+              <enumeratedValues derivedFrom="PMC" /></field>
+            <field><name>5</name><lsb>5</lsb><msb>5</msb>
+              <enumeratedValues derivedFrom="PMC" /></field>
+            <field><name>6</name><lsb>6</lsb><msb>6</msb>
+              <enumeratedValues derivedFrom="PMC" /></field>
+            <field><name>7</name><lsb>7</lsb><msb>7</msb>
+              <enumeratedValues derivedFrom="PMC" /></field>
+            <field><name>8</name><lsb>8</lsb><msb>8</msb>
+              <enumeratedValues derivedFrom="PMC" /></field>
+            <field><name>9</name><lsb>9</lsb><msb>9</msb>
+              <enumeratedValues derivedFrom="PMC" /></field>
+            <field><name>10</name><lsb>10</lsb><msb>10</msb>
+              <enumeratedValues derivedFrom="PMC" /></field>
+            <field><name>11</name><lsb>11</lsb><msb>11</msb>
+              <enumeratedValues derivedFrom="PMC" /></field>
+            <field><name>12</name><lsb>12</lsb><msb>12</msb>
+              <enumeratedValues derivedFrom="PMC" /></field>
+            <field><name>13</name><lsb>13</lsb><msb>13</msb>
+              <enumeratedValues derivedFrom="PMC" /></field>
+            <field><name>14</name><lsb>14</lsb><msb>14</msb>
+              <enumeratedValues derivedFrom="PMC" /></field>
+            <field><name>15</name><lsb>15</lsb><msb>15</msb>
+              <enumeratedValues derivedFrom="PMC" /></field>
+            <field><name>enable_0</name><lsb>16</lsb><msb>16</msb></field>
+            <field><name>enable_1</name><lsb>17</lsb><msb>17</msb></field>
+            <field><name>enable_2</name><lsb>18</lsb><msb>18</msb></field>
+            <field><name>enable_3</name><lsb>19</lsb><msb>19</msb></field>
+            <field><name>enable_4</name><lsb>20</lsb><msb>20</msb></field>
+            <field><name>enable_5</name><lsb>21</lsb><msb>21</msb></field>
+            <field><name>enable_6</name><lsb>22</lsb><msb>22</msb></field>
+            <field><name>enable_7</name><lsb>23</lsb><msb>23</msb></field>
+            <field><name>enable_8</name><lsb>24</lsb><msb>24</msb></field>
+            <field><name>enable_9</name><lsb>25</lsb><msb>25</msb></field>
+            <field><name>enable_10</name><lsb>26</lsb><msb>26</msb></field>
+            <field><name>enable_11</name><lsb>27</lsb><msb>27</msb></field>
+            <field><name>enable_12</name><lsb>28</lsb><msb>28</msb></field>
+            <field><name>enable_13</name><lsb>29</lsb><msb>29</msb></field>
+            <field><name>enable_14</name><lsb>30</lsb><msb>30</msb></field>
+            <field><name>enable_15</name><lsb>31</lsb><msb>31</msb></field>
+          </fields>
+        </register>
+        <register>
+          <name>PFCAE%s</name>
+          <description>Port Function Control Additional Expansion Register (PFCAEn) - This register, together with the PFCn and PFCEn register, specifies the alternative function of the pins. The I/O direction of several alternative functions can be controlled directly by using the Pn_m pin. For these alternative functions, the PIPCn.PIPCnm bit must be set to 1. For all other alternative functions, the I/O direction is specified by using the PMn.PMnm bit. After selecting an alternative function by the PFCn.PFCnm, PFCEn.PFCEnm, or PFCAEn.PFCAEnm bit, set the PMCn.PMCnm bit to 1.</description>
+          <addressOffset>0xa00</addressOffset>
+          <width>16</width>
+          <size>16</size>
+          <dim>12</dim> <!-- RZ/A1H 324-pin (P0–P11)  -->
+          <dimIncrement>4</dimIncrement>
+          <fields>
+            <field><name>0</name><lsb>0</lsb><msb>0</msb></field>
+            <field><name>1</name><lsb>1</lsb><msb>1</msb></field>
+            <field><name>2</name><lsb>2</lsb><msb>2</msb></field>
+            <field><name>3</name><lsb>3</lsb><msb>3</msb></field>
+            <field><name>4</name><lsb>4</lsb><msb>4</msb></field>
+            <field><name>5</name><lsb>5</lsb><msb>5</msb></field>
+            <field><name>6</name><lsb>6</lsb><msb>6</msb></field>
+            <field><name>7</name><lsb>7</lsb><msb>7</msb></field>
+            <field><name>8</name><lsb>8</lsb><msb>8</msb></field>
+            <field><name>9</name><lsb>9</lsb><msb>9</msb></field>
+            <field><name>10</name><lsb>10</lsb><msb>10</msb></field>
+            <field><name>11</name><lsb>11</lsb><msb>11</msb></field>
+            <field><name>12</name><lsb>12</lsb><msb>12</msb></field>
+            <field><name>13</name><lsb>13</lsb><msb>13</msb></field>
+            <field><name>14</name><lsb>14</lsb><msb>14</msb></field>
+            <field><name>15</name><lsb>15</lsb><msb>15</msb></field>
+          </fields>
+        </register>
+        <register>
+          <name>PIBC%s</name>
+          <description>Port Input Buffer Control Register (PIBCn/JPIBC0) In input port mode (PMCn.PMCnm = 0 and PMn.PMnm = 1 or JPMC0.JPMC0 = 0), this register enables or disables the input buffer for the Pn_m pin.</description>
+          <addressOffset>0x4000</addressOffset>
+          <width>16</width>
+          <size>16</size>
+          <dim>12</dim> <!-- RZ/A1H 324-pin (P0–P11)  -->
+          <dimIncrement>4</dimIncrement>
+          <fields>
+            <field><name>0</name><lsb>0</lsb><msb>0</msb></field>
+            <field><name>1</name><lsb>1</lsb><msb>1</msb></field>
+            <field><name>2</name><lsb>2</lsb><msb>2</msb></field>
+            <field><name>3</name><lsb>3</lsb><msb>3</msb></field>
+            <field><name>4</name><lsb>4</lsb><msb>4</msb></field>
+            <field><name>5</name><lsb>5</lsb><msb>5</msb></field>
+            <field><name>6</name><lsb>6</lsb><msb>6</msb></field>
+            <field><name>7</name><lsb>7</lsb><msb>7</msb></field>
+            <field><name>8</name><lsb>8</lsb><msb>8</msb></field>
+            <field><name>9</name><lsb>9</lsb><msb>9</msb></field>
+            <field><name>10</name><lsb>10</lsb><msb>10</msb></field>
+            <field><name>11</name><lsb>11</lsb><msb>11</msb></field>
+            <field><name>12</name><lsb>12</lsb><msb>12</msb></field>
+            <field><name>13</name><lsb>13</lsb><msb>13</msb></field>
+            <field><name>14</name><lsb>14</lsb><msb>14</msb></field>
+            <field><name>15</name><lsb>15</lsb><msb>15</msb></field>
+          </fields>
+        </register>
+        <register>
+          <name>PBDC%s</name>
+          <description>Port Bidirection Control Register (PBDCn) - This register enables or disables the input buffer while the output buffer is enabled. When the input buffer is enabled while the output buffer is enabled, the bidirectional mode is entered, allowing the level of the Pn_m pin to always be read via the PPRn.PPRnm bit.</description>
+          <addressOffset>0x4100</addressOffset>
+          <width>16</width>
+          <size>16</size>
+          <dim>12</dim> <!-- RZ/A1H 324-pin (P0–P11)  -->
+          <dimIncrement>4</dimIncrement>
+          <fields>
+            <field><name>0</name><lsb>0</lsb><msb>0</msb></field>
+            <field><name>1</name><lsb>1</lsb><msb>1</msb></field>
+            <field><name>2</name><lsb>2</lsb><msb>2</msb></field>
+            <field><name>3</name><lsb>3</lsb><msb>3</msb></field>
+            <field><name>4</name><lsb>4</lsb><msb>4</msb></field>
+            <field><name>5</name><lsb>5</lsb><msb>5</msb></field>
+            <field><name>6</name><lsb>6</lsb><msb>6</msb></field>
+            <field><name>7</name><lsb>7</lsb><msb>7</msb></field>
+            <field><name>8</name><lsb>8</lsb><msb>8</msb></field>
+            <field><name>9</name><lsb>9</lsb><msb>9</msb></field>
+            <field><name>10</name><lsb>10</lsb><msb>10</msb></field>
+            <field><name>11</name><lsb>11</lsb><msb>11</msb></field>
+            <field><name>12</name><lsb>12</lsb><msb>12</msb></field>
+            <field><name>13</name><lsb>13</lsb><msb>13</msb></field>
+            <field><name>14</name><lsb>14</lsb><msb>14</msb></field>
+            <field><name>15</name><lsb>15</lsb><msb>15</msb></field>
+          </fields>
+        </register>
+        <register>
+          <name>PIPC%s</name>
+          <description>Port IP Control Register (PIPCn) - This register is used to specify whether the I/O direction of the Pn_m pin is controlled by the PMn.PMnm bit or by the alternative function in alternative mode (the PMCn.PMCnm bit is 1). When using an alternative function shown in Table 54.7, set the PIPCn.PIPCnm bit to 0. When using an alternative function that is not shown in Table 54.7, set the PIPCn.PIPCnm bit to 1. When the PIPCn.PIPCnm bit is set to 1, the alternative function controls the I/O direction and the PMn.PMnm bit setting becomes invalid.</description>
+          <addressOffset>0x4200</addressOffset>
+          <width>16</width>
+          <size>16</size>
+          <dim>12</dim> <!-- RZ/A1H 324-pin (P0–P11)  -->
+          <dimIncrement>4</dimIncrement>
+          <fields>
+            <field><name>0</name><lsb>0</lsb><msb>0</msb></field>
+            <field><name>1</name><lsb>1</lsb><msb>1</msb></field>
+            <field><name>2</name><lsb>2</lsb><msb>2</msb></field>
+            <field><name>3</name><lsb>3</lsb><msb>3</msb></field>
+            <field><name>4</name><lsb>4</lsb><msb>4</msb></field>
+            <field><name>5</name><lsb>5</lsb><msb>5</msb></field>
+            <field><name>6</name><lsb>6</lsb><msb>6</msb></field>
+            <field><name>7</name><lsb>7</lsb><msb>7</msb></field>
+            <field><name>8</name><lsb>8</lsb><msb>8</msb></field>
+            <field><name>9</name><lsb>9</lsb><msb>9</msb></field>
+            <field><name>10</name><lsb>10</lsb><msb>10</msb></field>
+            <field><name>11</name><lsb>11</lsb><msb>11</msb></field>
+            <field><name>12</name><lsb>12</lsb><msb>12</msb></field>
+            <field><name>13</name><lsb>13</lsb><msb>13</msb></field>
+            <field><name>14</name><lsb>14</lsb><msb>14</msb></field>
+            <field><name>15</name><lsb>15</lsb><msb>15</msb></field>
+          </fields>
+        </register>
+        <register>
+          <name>SNCR</name>
+          <description>Serial Sound Interface Noise Canceler Control Register (SNCR) - This register controls the noise canceler in the input route from the LSI pin to a serial sound interface. Each bit can be set only when slave mode is selected for the corresponding channel of the serial sound interface. The bit should be used as it is the initial value (H'00000000) when master mode is selected for the corresponding channel of the serial sound interface.</description>
+          <addressOffset>0xc00</addressOffset>
+          <width>16</width>
+          <size>16</size>
+          <fields>
+            <field>
+              <name>ETSEL</name>
+              <msb>6</msb><lsb>6</lsb>
+              <description>Enables or disables the Ethernet controller and EthernetAVB with respect to the pins for MII supported in the Ethernet.</description>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>ETHERNET</name>
+                  <description>The Ethernet controller is enabled and the EthernetAVB is disabled.</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>EAVB</name>
+                  <description>The EthernetAVB is enabled and the Ethernet controller is disabled.</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>SSI5NCE</name>
+              <msb>5</msb><lsb>5</lsb>
+              <description>Serial Sound Interface Channel 5 Noise Canceler Enable - Enables or disables the noise canceler of SSISCK5, SSIWS5, and SSIRxD5.</description>
+            </field>
+            <field>
+              <name>SSI4NCE</name>
+              <msb>4</msb><lsb>4</lsb>
+              <description>Serial Sound Interface Channel 4 Noise Canceler Enable - Enables or disables the noise canceler of SSISCK4, SSIWS4, and SSIRxD4.</description>
+            </field>
+            <field>
+              <name>SSI3NCE</name>
+              <msb>3</msb><lsb>3</lsb>
+              <description>Serial Sound Interface Channel 3 Noise Canceler Enable - Enables or disables the noise canceler of SSISCK3, SSIWS3, and SSIRxD3.</description>
+            </field>
+            <field>
+              <name>SSI2NCE</name>
+              <msb>2</msb><lsb>2</lsb>
+              <description>Serial Sound Interface Channel 2 Noise Canceler Enable - Enables or disables the noise canceler of SSISCK2, SSIWS2, and SSIRxD2.</description>
+            </field>
+            <field>
+              <name>SSI1NCE</name>
+              <msb>1</msb><lsb>1</lsb>
+              <description>Serial Sound Interface Channel 1 Noise Canceler Enable - Enables or disables the noise canceler of SSISCK1, SSIWS1, and SSIRxD1.</description>
+            </field>
+            <field>
+              <name>SSI0NCE</name>
+              <msb>0</msb><lsb>0</lsb>
+              <description>Serial Sound Interface Channel 0 Noise Canceler Enable - Enables or disables the noise canceler of SSISCK0, SSIWS0, and SSIRxD0.</description>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+    <!-- PORT -->
+
+    <!-- JPORT -->
+    <peripheral>
+      <name>JPORT</name>
+      <baseAddress>0xfcfe7b00</baseAddress>
+      <groupName>Ports</groupName>
+      <description>JTAG ports</description>
+      <registers>
+        <register>
+          <name>JPPR0</name>
+          <description>Port Pin Read Register (PPRn/JPPR0) - The PPRn register reflects either the level of the Pn_m pin, the value of the Pn.Pnm bit, or the output level of the alternative function. The value read depends on various register settings as described in Table 54.4, PPRnm Read Values.</description>
+          <addressOffset>0x020</addressOffset>
+          <width>16</width>
+          <size>16</size>
+          <access>read-only</access>
+          <fields>
+            <field><name>0</name><lsb>0</lsb><msb>0</msb></field>
+            <field><name>1</name><lsb>1</lsb><msb>1</msb></field>
+          </fields>
+        </register>
+        <register>
+          <name>JPMC0</name>
+          <description>
+            Port Mode Control Register (PMCn/JPMC0) - This register is used to specify whether the Pn_m pins are in port mode or in alternative mode.
+
+            Caution: The input/output control is not performed just by setting alternative mode (PMCn.PMCnm). Set 1 in the PIPCn.PIPCnm bit too when the I/O control is to be performed by using the alternative function.
+          </description>
+          <addressOffset>0x040</addressOffset>
+          <width>16</width>
+          <size>16</size>
+          <fields>
+            <field>
+              <name>0</name><lsb>0</lsb><msb>0</msb>
+              <enumeratedValues>
+                <name>PMC</name>
+                <enumeratedValue><name>PORT</name><value>0</value></enumeratedValue>
+                <enumeratedValue><name>ALT</name><value>1</value></enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field><name>1</name><lsb>1</lsb><msb>1</msb>
+              <enumeratedValues derivedFrom="PMC" /></field>
+          </fields>
+        </register>
+        <register>
+          <name>JPMCSR0</name>
+          <description>Port Mode Control Set and Reset Register (PMCSRn/JPMCSR0) - This register provides an alternative method for writing data to the PMCn register. The higher bits of the PMCSRn register specify whether data can be written to the PMCn.PMCnm bit specified by the lower bits of the PMCSRn register. When reading, the higher 16 bits are read as 0000H. The lower 16 bits are read as the value of the PMCn register.</description>
+          <addressOffset>0x90</addressOffset>
+          <width>32</width>
+          <size>32</size>
+          <fields>
+            <field><name>0</name><lsb>0</lsb><msb>0</msb>
+              <enumeratedValues>
+                <name>PMC</name>
+                <enumeratedValue><name>PORT</name><value>0</value></enumeratedValue>
+                <enumeratedValue><name>ALT</name><value>1</value></enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field><name>1</name><lsb>1</lsb><msb>1</msb>
+              <!-- FIXME: `derivedFrom="PMC%s.0.PMC"` produces broken Rust code -->
+              <enumeratedValues derivedFrom="PMC" /></field>
+            <field><name>enable_0</name><lsb>16</lsb><msb>16</msb></field>
+            <field><name>enable_1</name><lsb>17</lsb><msb>17</msb></field>
+          </fields>
+        </register>
+        <register>
+          <name>JPIBC0</name>
+          <description>Port Input Buffer Control Register (PIBCn/JPIBC0) In input port mode (PMCn.PMCnm = 0 and PMn.PMnm = 1 or JPMC0.JPMC0 = 0), this register enables or disables the input buffer for the Pn_m pin.</description>
+          <addressOffset>0x400</addressOffset>
+          <width>16</width>
+          <size>16</size>
+          <fields>
+            <field><name>0</name><lsb>0</lsb><msb>0</msb></field>
+            <field><name>1</name><lsb>1</lsb><msb>1</msb></field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+    <!-- JPORT -->
   </peripherals>
 </device>

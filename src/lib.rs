@@ -200,6 +200,44 @@ impl Deref for SC7 {
         unsafe { &*SC7::ptr() }
     }
 }
+#[doc = "General ports"]
+pub struct PORT {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for PORT {}
+impl PORT {
+    #[doc = r" Returns a pointer to the register block"]
+    pub fn ptr() -> *const port::RegisterBlock {
+        0xfcfe_3000 as *const _
+    }
+}
+impl Deref for PORT {
+    type Target = port::RegisterBlock;
+    fn deref(&self) -> &port::RegisterBlock {
+        unsafe { &*PORT::ptr() }
+    }
+}
+#[doc = "General ports"]
+pub mod port;
+#[doc = "JTAG ports"]
+pub struct JPORT {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for JPORT {}
+impl JPORT {
+    #[doc = r" Returns a pointer to the register block"]
+    pub fn ptr() -> *const jport::RegisterBlock {
+        0xfcfe_7b00 as *const _
+    }
+}
+impl Deref for JPORT {
+    type Target = jport::RegisterBlock;
+    fn deref(&self) -> &jport::RegisterBlock {
+        unsafe { &*JPORT::ptr() }
+    }
+}
+#[doc = "JTAG ports"]
+pub mod jport;
 #[allow(renamed_and_removed_lints)]
 #[allow(private_no_mangle_statics)]
 #[no_mangle]
@@ -229,6 +267,10 @@ pub struct Peripherals {
     pub SC6: SC6,
     #[doc = "SC7"]
     pub SC7: SC7,
+    #[doc = "PORT"]
+    pub PORT: PORT,
+    #[doc = "JPORT"]
+    pub JPORT: JPORT,
 }
 impl Peripherals {
     #[doc = r" Unchecked version of `Peripherals::take`"]
@@ -267,6 +309,12 @@ impl Peripherals {
                 _marker: PhantomData,
             },
             SC7: SC7 {
+                _marker: PhantomData,
+            },
+            PORT: PORT {
+                _marker: PhantomData,
+            },
+            JPORT: JPORT {
                 _marker: PhantomData,
             },
         }
