@@ -8,24 +8,24 @@ extern crate vcell;
 use core::marker::PhantomData;
 use core::ops::Deref;
 #[doc = "Clock Pulse Generator"]
-pub struct CPG {
+pub struct CLOCK {
     _marker: PhantomData<*const ()>,
 }
-unsafe impl Send for CPG {}
-impl CPG {
+unsafe impl Send for CLOCK {}
+impl CLOCK {
     #[doc = r" Returns a pointer to the register block"]
-    pub fn ptr() -> *const cpg::RegisterBlock {
+    pub fn ptr() -> *const clock::RegisterBlock {
         0xfcfe_0010 as *const _
     }
 }
-impl Deref for CPG {
-    type Target = cpg::RegisterBlock;
-    fn deref(&self) -> &cpg::RegisterBlock {
-        unsafe { &*CPG::ptr() }
+impl Deref for CLOCK {
+    type Target = clock::RegisterBlock;
+    fn deref(&self) -> &clock::RegisterBlock {
+        unsafe { &*CLOCK::ptr() }
     }
 }
 #[doc = "Clock Pulse Generator"]
-pub mod cpg;
+pub mod clock;
 #[doc = "Interrupt controller (chip-specific registers)"]
 pub struct ICTL {
     _marker: PhantomData<*const ()>,
@@ -283,8 +283,8 @@ static mut DEVICE_PERIPHERALS: bool = false;
 #[doc = r" All the peripherals"]
 #[allow(non_snake_case)]
 pub struct Peripherals {
-    #[doc = "CPG"]
-    pub CPG: CPG,
+    #[doc = "CLOCK"]
+    pub CLOCK: CLOCK,
     #[doc = "ICTL"]
     pub ICTL: ICTL,
     #[doc = "OSTM0"]
@@ -320,7 +320,7 @@ impl Peripherals {
         debug_assert!(!DEVICE_PERIPHERALS);
         DEVICE_PERIPHERALS = true;
         Peripherals {
-            CPG: CPG {
+            CLOCK: CLOCK {
                 _marker: PhantomData,
             },
             ICTL: ICTL {
