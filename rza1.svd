@@ -12,9 +12,9 @@
   <resetMask>0xFFFFFFFF</resetMask>
 
   <peripherals>
-    <!-- CPG -->
+    <!-- CLOCK -->
     <peripheral>
-      <name>CPG</name>
+      <name>CLOCK</name>
       <baseAddress>0xfcfe0010</baseAddress>
       <groupName>Clock and Power</groupName>
       <description>Clock Pulse Generator</description>
@@ -129,7 +129,7 @@
         </register>
       </registers>
     </peripheral>
-    <!-- CPG -->
+    <!-- CLOCK -->
 
     <!-- ICTL -->
     <peripheral>
