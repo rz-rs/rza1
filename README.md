@@ -12,16 +12,16 @@ The library is only updated passively and therefore there's no particular schedu
 
  - [ ] Secondary Cache (L2C-310)
  - [ ] LSI Internal Bus
- - [x] **Clock Pulse Generator**
+ - [x] **Clock Pulse Generator** (`CLOCK`)
  - [ ] Interrupt Controller (PL390)
- - [x] **Interrupt Controller (Miscellaneous Registers)**
+ - [x] **Interrupt Controller (Miscellaneous Registers)** (`ICTL`)
  - [ ] Bus State Contrller
  - [ ] Direct Memory Access Controller
  - [ ] Multi-Function Timer Pulse Unit 2
- - [x] **OS Timer**
+ - [x] **OS Timer** (`OSTMn`)
  - [ ] Watchdog Timer
  - [ ] Realtime Clock
- - [x] **Serial Communication Interface with FIFO**
+ - [x] **Serial Communication Interface with FIFO** (`SCn`)
  - [ ] Serial Communications Interface
  - [ ] Renesas Serial Peripheral Interface
  - [ ] SPI Multi I/O Bus Controller
@@ -61,8 +61,8 @@ The library is only updated passively and therefore there's no particular schedu
  - [ ] MMC Host Interface
  - [ ] Motor Control PWM Timer
  - [ ] On-Chip RAM
- - [x] **Ports**
- - [x] **Power-Down Modes**
+ - [x] **Ports** (`PORT`)
+ - [x] **Power-Down Modes** (`POWER`)
  - [ ] Debugger Interface
  - [x] ~~EthernetAVB~~ *NDA required*
 
