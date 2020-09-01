@@ -50,7 +50,6 @@ The library is only updated passively and therefore there's no particular schedu
  - [ ] LVDS Output Interface
  - [x] ~~Image Renderer (IMR-LS2)~~ *NDA required*
  - [x] ~~Image Renderer for Display (IMR-LSD)~~ *NDA required*
- - [ ] LVDS Output Interface
  - [ ] Display Out Comparison Unit
  - [x] ~~Renesas Graphics Processor for OpenVG~~ *No public documentation available*
  - [ ] JPEG Codec Unit
