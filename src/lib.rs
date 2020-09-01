@@ -257,6 +257,25 @@ impl Deref for JPORT {
 }
 #[doc = "JTAG ports"]
 pub mod jport;
+#[doc = "Power-Down Modes"]
+pub struct POWER {
+    _marker: PhantomData<*const ()>,
+}
+unsafe impl Send for POWER {}
+impl POWER {
+    #[doc = r" Returns a pointer to the register block"]
+    pub fn ptr() -> *const power::RegisterBlock {
+        0xfcfe_0000 as *const _
+    }
+}
+impl Deref for POWER {
+    type Target = power::RegisterBlock;
+    fn deref(&self) -> &power::RegisterBlock {
+        unsafe { &*POWER::ptr() }
+    }
+}
+#[doc = "Power-Down Modes"]
+pub mod power;
 #[allow(renamed_and_removed_lints)]
 #[allow(private_no_mangle_statics)]
 #[no_mangle]
@@ -292,6 +311,8 @@ pub struct Peripherals {
     pub PORT: PORT,
     #[doc = "JPORT"]
     pub JPORT: JPORT,
+    #[doc = "POWER"]
+    pub POWER: POWER,
 }
 impl Peripherals {
     #[doc = r" Unchecked version of `Peripherals::take`"]
@@ -339,6 +360,9 @@ impl Peripherals {
                 _marker: PhantomData,
             },
             JPORT: JPORT {
+                _marker: PhantomData,
+            },
+            POWER: POWER {
                 _marker: PhantomData,
             },
         }

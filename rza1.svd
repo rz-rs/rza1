@@ -16,7 +16,7 @@
     <peripheral>
       <name>CPG</name>
       <baseAddress>0xfcfe0010</baseAddress>
-      <groupName>Clock Pulse Generator</groupName>
+      <groupName>Clock and Power</groupName>
       <description>Clock Pulse Generator</description>
       <registers>
         <register>
@@ -1793,5 +1793,1117 @@
       </registers>
     </peripheral>
     <!-- JPORT -->
+
+    <!-- POWER -->
+    <peripheral>
+      <name>POWER</name>
+      <baseAddress>0xfcfe0000</baseAddress>
+      <groupName>Clock and Power</groupName>
+      <description>Power-Down Modes</description>
+      <registers>
+        <register>
+          <name>STBCR1</name>
+          <description>Standby Control Register 1 (STBCR1) - STBCR1 is an 8-bit readable/writable register that specifies the state of the power-down mode.</description>
+          <addressOffset>0x00020</addressOffset>
+          <width>8</width>
+          <size>8</size>
+          <fields>
+            <field>
+              <name>STBY_DEEP</name>
+              <msb>7</msb><lsb>6</lsb>
+              <description>Software Standby, Deep Standby - Specifies transition to software standby mode or deep standby mode.
+
+              (*1) When using the WFE instruction, execute the following three instructions in the given sequence: SEV, WFE, and WFE. The instruction to be executed at the time of a transition to the sleep mode depends on a condition. For details, see 55.3.1 (1) Transition to Sleep Mode.
+
+              (*2) Do not execute the WFE instruction while the STBY bit in STBCR1 is 1.
+              </description>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>SLEEP</name>
+                  <description>Executing WFI or WFE (*1) instruction puts chip into sleep mode.</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>SOFTWARE_STANDBY</name>
+                  <description>Executing WFI instruction puts chip into software standby mode. (*2)</description>
+                  <value>2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>DEEP_STANDBY</name>
+                  <description>Executing WFI instruction puts chip into deep standby mode. (*2)</description>
+                  <value>3</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>STBCR2</name>
+          <description>Standby Control Register 2 (STBCR2) - STBCR2 is an 8-bit readable/writable register that controls the operation of each module.</description>
+          <addressOffset>0x00024</addressOffset>
+          <width>8</width>
+          <size>8</size>
+          <fields>
+            <field>
+              <name>HIZ</name>
+              <msb>7</msb><lsb>7</lsb>
+              <description>Port High Impedance - Selects whether the state of specific output pin is retained or high impedance in software standby mode or deep standby mode. As to which pins are controlled, see section 60.1, Pin States in section 60, States and Handling of Pins.</description>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>RETAIN</name>
+                  <description>The pin state is retained in software standby mode or deep standby mode.</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>HIZ</name>
+                  <description>The pin is set to high-impedance in software standby mode or deep standby mode.</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>MSTP20</name>
+              <msb>0</msb><lsb>0</lsb>
+              <description>Module Stop 20 [not for disclosure] - When the MSTP20 bit is set to 1, the clock supply to CoreSight is halted.</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>STBCR3</name>
+          <description>Standby Control Register 3 (STBCR3) - STBCR3 is an 8-bit readable/writable register that controls the operation of each module.</description>
+          <addressOffset>0x00420</addressOffset>
+          <width>8</width>
+          <size>8</size>
+          <fields>
+            <field>
+              <name>MSTP37</name><msb>7</msb><lsb>7</lsb>
+              <description>Module Stop 37 - When the MSTP37 bit is set to 1, the clock supply to the IEBusTM controller is halted.</description>
+            </field>
+            <field>
+              <name>MSTP36</name><msb>6</msb><lsb>6</lsb>
+              <description>Module Stop 36 - When the MSTP36 bit is set to 1, the clock supply to serial communication interface (IrDA) is halted.</description>
+            </field>
+            <field>
+              <name>MSTP35</name><msb>5</msb><lsb>5</lsb>
+              <description>Module Stop 35 - When the MSTP35 bit is set to 1, the clock supply to the LIN interface channel 0 is halted.</description>
+            </field>
+            <field>
+              <name>MSTP34</name><msb>4</msb><lsb>4</lsb>
+              <description>Module Stop 34 - When the MSTP34 bit is set to 1, the clock supply to the LIN interface channel 1 is halted.</description>
+            </field>
+            <field>
+              <name>MSTP33</name><msb>3</msb><lsb>3</lsb>
+              <description>Module Stop 33 - When the MSTP33 bit is set to 1, the clock supply to the multi-function timer pulse unit 2 is halted.</description>
+            </field>
+            <field>
+              <name>MSTP32</name><msb>2</msb><lsb>2</lsb>
+              <description>Module Stop 32 - When the MSTP32 bit is set to 1, the clock supply to the CAN interface is halted.</description>
+            </field>
+            <field>
+              <name>MSTP31</name><msb>1</msb><lsb>1</lsb>
+              <description>Module Stop 31 - When the MSTP31 bit is set to 1, the clock supply to the A/D converter is halted and the analog power supply to the A/D converter is shut off.</description>
+            </field>
+            <field>
+              <name>MSTP30</name><msb>0</msb><lsb>0</lsb>
+              <description>Module Stop 30 - When the MSTP30 bit is set to 1, the clock supply to the motor control PWM timer is halted.</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>STBCR4</name>
+          <description>Standby Control Register 4 (STBCR4) - STBCR4 is an 8-bit readable/writable register that controls the operation of each module.</description>
+          <addressOffset>0x00424</addressOffset>
+          <width>8</width>
+          <size>8</size>
+          <fields>
+            <field>
+              <name>MSTP47</name><msb>7</msb><lsb>7</lsb>
+              <description>Module Stop 47 - When the MSTP47 bit is set to 1, the clock supply to channel 0 of the serial communication interface with FIFO is halted.</description>
+            </field>
+            <field>
+              <name>MSTP46</name><msb>6</msb><lsb>6</lsb>
+              <description>Module Stop 46 - When the MSTP46 bit is set to 1, the clock supply to channel 1 of the serial communication interface with FIFO is halted.</description>
+            </field>
+            <field>
+              <name>MSTP45</name><msb>5</msb><lsb>5</lsb>
+              <description>Module Stop 45 - When the MSTP45 bit is set to 1, the clock supply to channel 2 of the serial communication interface with FIFO is halted.</description>
+            </field>
+            <field>
+              <name>MSTP44</name><msb>4</msb><lsb>4</lsb>
+              <description>Module Stop 44 - When the MSTP44 bit is set to 1, the clock supply to channel 3 of the serial communication interface with FIFO is halted.</description>
+            </field>
+            <field>
+              <name>MSTP43</name><msb>3</msb><lsb>3</lsb>
+              <description>Module Stop 43 - When the MSTP43 bit is set to 1, the clock supply to channel 4 of the serial communication interface with FIFO is halted.</description>
+            </field>
+            <field>
+              <name>MSTP42</name><msb>2</msb><lsb>2</lsb>
+              <description>Module Stop 42 - When the MSTP42 bit is set to 1, the clock supply to channel 5 of the serial communication interface with FIFO is halted.</description>
+            </field>
+            <field>
+              <name>MSTP41</name><msb>1</msb><lsb>1</lsb>
+              <description>Module Stop 41 - When the MSTP41 bit is set to 1, the clock supply to channel 6 of the serial communication interface with FIFO is halted.</description>
+            </field>
+            <field>
+              <name>MSTP40</name><msb>0</msb><lsb>0</lsb>
+              <description>Module Stop 40 - When the MSTP40 bit is set to 1, the clock supply to channel 7 of the serial communication interface with FIFO is halted.</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>STBCR5</name>
+          <description>Standby Control Register 5 (STBCR5) - STBCR5 is an 8-bit readable/writable register that controls the operation of each module.</description>
+          <addressOffset>0x00428</addressOffset>
+          <width>8</width>
+          <size>8</size>
+          <fields>
+            <field>
+              <name>MSTP57</name><msb>7</msb><lsb>7</lsb>
+              <description>Module Stop 57 - When the MSTP57 bit is set to 1, the clock supply to channel 0 of the serial communication interface (SCI) is halted.</description>
+            </field>
+            <field>
+              <name>MSTP56</name><msb>6</msb><lsb>6</lsb>
+              <description>Module Stop 56 - When the MSTP56 bit is set to 1, the clock supply to channel 1 of the serial communication interface (SCI) is halted.</description>
+            </field>
+            <field>
+              <name>MSTP55</name><msb>5</msb><lsb>5</lsb>
+              <description>Module Stop 55 - When the MSTP55 bit is set to 1, the clock supply to channel 0 of the sound generator is halted.</description>
+            </field>
+            <field>
+              <name>MSTP54</name><msb>4</msb><lsb>4</lsb>
+              <description>Module Stop 54 - When the MSTP54 bit is set to 1, the clock supply to channel 1 of the sound generator is halted.</description>
+            </field>
+            <field>
+              <name>MSTP53</name><msb>3</msb><lsb>3</lsb>
+              <description>Module Stop 53 - When the MSTP53 bit is set to 1, the clock supply to channel 2 of the sound generator is halted.</description>
+            </field>
+            <field>
+              <name>MSTP52</name><msb>2</msb><lsb>2</lsb>
+              <description>Module Stop 52 - When the MSTP52 bit is set to 1, the clock supply to channel 3 of the sound generator is halted.</description>
+            </field>
+            <field>
+              <name>MSTP51</name><msb>1</msb><lsb>1</lsb>
+              <description>Module Stop 51 - When the MSTP51 bit is set to 1, the clock supply to channel 0 of the OS timer is halted.</description>
+            </field>
+            <field>
+              <name>MSTP50</name><msb>0</msb><lsb>0</lsb>
+              <description>Module Stop 50 - When the MSTP50 bit is set to 1, the clock supply to channel 1 of the OS timer is halted.</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>STBCR6</name>
+          <description>Standby Control Register 6 (STBCR6) - STBCR6 is an 8-bit readable/writable register that controls the operation of each module.</description>
+          <addressOffset>0x0042c</addressOffset>
+          <width>8</width>
+          <size>8</size>
+          <fields>
+            <field>
+              <name>MSTP67</name><msb>7</msb><lsb>7</lsb>
+              <description>Module Stop 67 - When the MSTP67 bit is set to 1, the clock supply to the A/D converter is halted.</description>
+            </field>
+            <field>
+              <name>MSTP66</name><msb>6</msb><lsb>6</lsb>
+              <description>Module Stop 66 - When the MSTP66 bit is set to 1, the clock supply to the capture engine unit is halted.</description>
+            </field>
+            <field>
+              <name>MSTP65</name><msb>5</msb><lsb>5</lsb>
+              <description>Module Stop 65 - When the MSTP65 bit is set to 1, the clock supply to channel 0 of the display out comparison unit is halted.</description>
+            </field>
+            <field>
+              <name>MSTP64</name><msb>4</msb><lsb>4</lsb>
+              <description>Module Stop 64 - When the MSTP64 bit is set to 1, the clock supply to channel 1 of the display out comparison unit is halted.</description>
+            </field>
+            <field>
+              <name>MSTP63</name><msb>3</msb><lsb>3</lsb>
+              <description>Module Stop 63 - When the MSTP63 bit is set to 1, the clock supply to channel 0 of the dynamic range compression is halted.</description>
+            </field>
+            <field>
+              <name>MSTP62</name><msb>2</msb><lsb>2</lsb>
+              <description>Module Stop 62 - When the MSTP62 bit is set to 1, the clock supply to channel 1 of the dynamic range compression is halted.</description>
+            </field>
+            <field>
+              <name>MSTP61</name><msb>1</msb><lsb>1</lsb>
+              <description>Module Stop 61 - When the MSTP61 bit is set to 1, the clock supply to the JPEG codec unit is halted.</description>
+            </field>
+            <field>
+              <name>MSTP60</name><msb>0</msb><lsb>0</lsb>
+              <description>Module Stop 60 - When the MSTP60 bit is set to 1, the clock supply to the realtime clock is halted.</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>STBCR7</name>
+          <description>Standby Control Register 7 (STBCR7) - STBCR7 is an 8-bit readable/writable register that controls the operation of each module.</description>
+          <addressOffset>0x00430</addressOffset>
+          <width>8</width>
+          <size>8</size>
+          <fields>
+            <field>
+              <name>MSTP77</name><msb>7</msb><lsb>7</lsb>
+              <description>Module Stop 77 - When the MSTP77 bit is set to 1, the clock supply to channel 0 of the digital video decoder is halted.</description>
+            </field>
+            <field>
+              <name>MSTP76</name><msb>6</msb><lsb>6</lsb>
+              <description>Module Stop 76 - When the MSTP76 bit is set to 1, the clock supply to channel 1 of the digital video decoder is halted.</description>
+            </field>
+            <field>
+              <name>MSTP74</name><msb>4</msb><lsb>4</lsb>
+              <description>Module Stop 74 - When the MSTP74 bit is set to 1, the clock supply to the Ethernet controller is halted.</description>
+            </field>
+            <field>
+              <name>MSTP73</name><msb>3</msb><lsb>3</lsb>
+              <description>Module Stop 73 - When the MSTP73 bit is set to 1, the clock supply to the NAND flash memory controller is halted.</description>
+            </field>
+            <field>
+              <name>MSTP71</name><msb>1</msb><lsb>1</lsb>
+              <description>Module Stop 71 - When the MSTP71 bit is set to 1, the clock supply to channel 0 of the USB 2.0 host/function module is halted.</description>
+            </field>
+            <field>
+              <name>MSTP70</name><msb>0</msb><lsb>0</lsb>
+              <description>Module Stop 70 - When the MSTP70 bit is set to 1, the clock supply to channel 1 of the USB 2.0 host/function module is halted.</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>STBCR8</name>
+          <description>Standby Control Register 8 (STBCR8) - STBCR8 is an 8-bit readable/writable register that controls the operation of each module.</description>
+          <addressOffset>0x00434</addressOffset>
+          <width>8</width>
+          <size>8</size>
+          <fields>
+            <field>
+              <name>MSTP87</name><msb>7</msb><lsb>7</lsb>
+              <description>Module Stop 87 - When the MSTP87 bit is set to 1, the clock supply to channel 0 of the image renderer is halted.</description>
+            </field>
+            <field>
+              <name>MSTP86</name><msb>6</msb><lsb>6</lsb>
+              <description>Module Stop 86 - When the MSTP86 bit is set to 1, the clock supply to channel 1 of the image renderer is halted.</description>
+            </field>
+            <field>
+              <name>MSTP85</name><msb>5</msb><lsb>5</lsb>
+              <description>Module Stop 85 - When the MSTP85 bit is set to 1, the clock supply to the display image renderer is halted.</description>
+            </field>
+            <field>
+              <name>MSTP84</name><msb>4</msb><lsb>4</lsb>
+              <description>Module Stop 84 - When the MSTP84 bit is set to 1, the clock supply to the MMC host interface is halted.</description>
+            </field>
+            <field>
+              <name>MSTP83</name><msb>3</msb><lsb>3</lsb>
+              <description>Module Stop 83 - When the MSTP83 bit is set to 1, the clock supply to the media local bus is halted.</description>
+            </field>
+            <field>
+              <name>MSTP82</name><msb>2</msb><lsb>2</lsb>
+              <description>Module Stop 82 - When the MSTP82 bit is set to 1, the clock supply to the EthernetAVB is halted.</description>
+            </field>
+            <field>
+              <name>MSTP81</name><msb>1</msb><lsb>1</lsb>
+              <description>Module Stop 81 - When the MSTP81 bit is set to 1, the clock supply to SCUX is halted. 0: SCUX runs.</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>STBCR9</name>
+          <description>Standby Control Register 9 (STBCR9) - STBCR9 is an 8-bit readable/writable register that controls the operation of each module.</description>
+          <addressOffset>0x00438</addressOffset>
+          <width>8</width>
+          <size>8</size>
+          <fields>
+            <field>
+              <name>MSTP97</name><msb>7</msb><lsb>7</lsb>
+              <description>Module Stop 97 - When the MSTP97 bit is set to 1, the clock supply to bus interface is halted.</description>
+            </field>
+            <field>
+              <name>MSTP96</name><msb>6</msb><lsb>6</lsb>
+              <description>Module Stop 96 - When the MSTP96 bit is set to 1, the clock supply to bus interface is halted.</description>
+            </field>
+            <field>
+              <name>MSTP95</name><msb>5</msb><lsb>5</lsb>
+              <description>Module Stop 95 - When the MSTP95 bit is set to 1, the clock supply to bus interface is halted.</description>
+            </field>
+            <field>
+              <name>MSTP94</name><msb>4</msb><lsb>4</lsb>
+              <description>Module Stop 94 - When the MSTP94 bit is set to 1, the clock supply to bus interface is halted.</description>
+            </field>
+            <field>
+              <name>MSTP93</name><msb>3</msb><lsb>3</lsb>
+              <description>Module Stop 93 - When the MSTP93 bit is set to 1, the clock supply to channel 0 of the SPI multi I/O bus controller is halted.</description>
+            </field>
+            <field>
+              <name>MSTP92</name><msb>2</msb><lsb>2</lsb>
+              <description>Module Stop 92 - When the MSTP92 bit is set to 1, the clock supply to channel 1 of the SPI multi I/O bus controller is halted.</description>
+            </field>
+            <field>
+              <name>MSTP91</name><msb>1</msb><lsb>1</lsb>
+              <description>Module Stop 91 - When the MSTP91 bit is set to 1, the clock supply to channel 0 of the video display controller 5 and the LVDS output interface is halted.</description>
+            </field>
+            <field>
+              <name>MSTP90</name><msb>0</msb><lsb>0</lsb>
+              <description>Module Stop 90 - When the MSTP90 bit is set to 1, the clock supply to channel 1 of the video display controller 5 is halted.</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>STBCR10</name>
+          <description>Standby Control Register 10 (STBCR10) - STBCR10 is an 8-bit readable/writable register that controls the operation of each module.</description>
+          <addressOffset>0x0043c</addressOffset>
+          <width>8</width>
+          <size>8</size>
+          <fields>
+            <field>
+              <name>MSTP107</name><msb>7</msb><lsb>7</lsb>
+              <description>Module Stop 107 - When the MSTP107 bit is set to 1, the clock supply to channel 0 of the Renesas serial peripheral interface is halted.</description>
+            </field>
+            <field>
+              <name>MSTP106</name><msb>6</msb><lsb>6</lsb>
+              <description>Module Stop 106 - When the MSTP106 bit is set to 1, the clock supply to channel 1 of the Renesas serial peripheral interface is halted.</description>
+            </field>
+            <field>
+              <name>MSTP105</name><msb>5</msb><lsb>5</lsb>
+              <description>Module Stop 105 - When the MSTP105 bit is set to 1, the clock supply to channel 2 of the Renesas serial peripheral interface is halted.</description>
+            </field>
+            <field>
+              <name>MSTP104</name><msb>4</msb><lsb>4</lsb>
+              <description>Module Stop 104 - When the MSTP104 bit is set to 1, the clock supply to channel 3 of the Renesas serial peripheral interface is halted.</description>
+            </field>
+            <field>
+              <name>MSTP103</name><msb>3</msb><lsb>3</lsb>
+              <description>Module Stop 103 - When the MSTP103 bit is set to 1, the clock supply to channel 4 of the Renesas serial peripheral interface is halted.</description>
+            </field>
+            <field>
+              <name>MSTP102</name><msb>2</msb><lsb>2</lsb>
+              <description>Module Stop 102 - When the MSTP102 bit is set to 1, the clock supply to the CD-ROM decoder is halted.</description>
+            </field>
+            <field>
+              <name>MSTP101</name><msb>1</msb><lsb>1</lsb>
+              <description>Module Stop 101 - When the MSTP101 bit is set to 1, the clock supply to the Renesas SPDIF interface is halted.</description>
+            </field>
+            <field>
+              <name>MSTP100</name><msb>0</msb><lsb>0</lsb>
+              <description>Module Stop 100 - When the MSTP100 bit is set to 1, the clock supply to the OpenVGTM- compliant Renesas graphics processor is halted.</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>STBCR11</name>
+          <description>Standby Control Register 10 (STBCR11) - STBCR11 is an 8-bit readable/writable register that controls the operation of each module.</description>
+          <addressOffset>0x00440</addressOffset>
+          <width>8</width>
+          <size>8</size>
+          <fields>
+            <field>
+              <name>MSTP115</name><msb>5</msb><lsb>5</lsb>
+              <description>Module Stop 115 - When the MSTP115 bit is set to 1, the clock supply to channel 0 of the serial sound interface is halted.</description>
+            </field>
+            <field>
+              <name>MSTP114</name><msb>4</msb><lsb>4</lsb>
+              <description>Module Stop 114 - When the MSTP114 bit is set to 1, the clock supply to channel 1 of the serial sound interface is halted.</description>
+            </field>
+            <field>
+              <name>MSTP113</name><msb>3</msb><lsb>3</lsb>
+              <description>Module Stop 113 - When the MSTP113 bit is set to 1, the clock supply to channel 2 of the serial sound interface is halted.</description>
+            </field>
+            <field>
+              <name>MSTP112</name><msb>2</msb><lsb>2</lsb>
+              <description>Module Stop 112 - When the MSTP112 bit is set to 1, the clock supply to channel 3 of the serial sound interface is halted.</description>
+            </field>
+            <field>
+              <name>MSTP111</name><msb>1</msb><lsb>1</lsb>
+              <description>Module Stop 111 - When the MSTP111 bit is set to 1, the clock supply to channel 4 of the serial sound interface is halted.</description>
+            </field>
+            <field>
+              <name>MSTP110</name><msb>0</msb><lsb>0</lsb>
+              <description>Module Stop 110 - When the MSTP110 bit is set to 1, the clock supply to channel 5 of the serial sound interface is halted.</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>STBCR12</name>
+          <description>Standby Control Register 12 (STBCR12) - STBCR12 is an 8-bit readable/writable register that controls the operation of each module.</description>
+          <addressOffset>0x00444</addressOffset>
+          <width>8</width>
+          <size>8</size>
+          <fields>
+            <field>
+              <name>MSTP123</name><msb>3</msb><lsb>3</lsb>
+              <description>Module Stop 123 - When the MSTP123 bit is set to 1, the SD host interface 00 is halted.</description>
+            </field>
+            <field>
+              <name>MSTP122</name><msb>2</msb><lsb>2</lsb>
+              <description>Module Stop 122 - When the MSTP122 bit is set to 1, the SD host interface 01 is halted.</description>
+            </field>
+            <field>
+              <name>MSTP121</name><msb>1</msb><lsb>1</lsb>
+              <description>Module Stop 121 - When the MSTP121 bit is set to 1, the SD host interface 10 is halted.</description>
+            </field>
+            <field>
+              <name>MSTP120</name><msb>0</msb><lsb>0</lsb>
+              <description>Module Stop 120 - When the MSTP120 bit is set to 1, the SD host interface 11 is halted.</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>STBCR13</name>
+          <description>Standby Control Register 13 (STBCR13) - STBCR13 is an 8-bit readable/writable register that controls the operation of each module.</description>
+          <addressOffset>0x00470</addressOffset>
+          <width>8</width>
+          <size>8</size>
+          <fields>
+            <field>
+              <name>MSTP132</name><msb>2</msb><lsb>2</lsb>
+              <description>Module Stop 132 - When the MSTP132 bit is set to 1, the clock supply to channel 1 of the pixel format converter is halted.</description>
+            </field>
+            <field>
+              <name>MSTP131</name><msb>1</msb><lsb>1</lsb>
+              <description>Module Stop 131 - When the MSTP131 bit is set to 1, the clock supply to channel 0 of the pixel format converter is halted.</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SWRSTCR1</name>
+          <description>Software Reset Control Register 1 (SWRSTCR1) - SWRSTCR1 is an 8-bit readable/writable register that controls a software reset for the serial sound interface and the operation of the crystal resonator for audio.</description>
+          <addressOffset>0x00460</addressOffset>
+          <width>8</width>
+          <size>8</size>
+          <fields>
+            <field>
+              <name>AXTALE</name><msb>7</msb><lsb>7</lsb>
+              <description>AUDIO_X1 Clock Control - Controls the function of AUDIO_X1 pin.</description>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>RUN</name>
+                  <description>Runs the on-chip crystal oscillator/enables the external clock input.</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>HALT</name>
+                  <description>Halts the on-chip crystal oscillator/disables the external clock input.</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>SRST16</name><msb>6</msb><lsb>6</lsb>
+              <description>Serial Sound Interface Channel 0 Software Reset - Controls the serial sound interface channel 0 reset with software.</description>
+            </field>
+            <field>
+              <name>SRST15</name><msb>5</msb><lsb>5</lsb>
+              <description>Serial Sound Interface Channel 1 Software Reset - Controls the serial sound interface channel 1 reset with software.</description>
+            </field>
+            <field>
+              <name>SRST14</name><msb>4</msb><lsb>4</lsb>
+              <description>Serial Sound Interface Channel 2 Software Reset - Controls the serial sound interface channel 2 reset with software.</description>
+            </field>
+            <field>
+              <name>SRST13</name><msb>3</msb><lsb>3</lsb>
+              <description>Serial Sound Interface Channel 3 Software Reset - Controls the serial sound interface channel 3 reset with software.</description>
+            </field>
+            <field>
+              <name>SRST12</name><msb>2</msb><lsb>2</lsb>
+              <description>Serial Sound Interface Channel 4 Software Reset - Controls the serial sound interface channel 4 reset with software.</description>
+            </field>
+            <field>
+              <name>SRST11</name><msb>1</msb><lsb>1</lsb>
+              <description>Serial Sound Interface Channel 5 Software Reset - Controls the serial sound interface channel 5 reset with software.</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SWRSTCR2</name>
+          <description>Software Reset Control Register 2 (SWRSTCR2) - SWRSTCR2 is an 8-bit readable/writable register that controls a software reset for each module.</description>
+          <addressOffset>0x00464</addressOffset>
+          <width>8</width>
+          <size>8</size>
+          <fields>
+            <field>
+              <name>SRST21</name><msb>1</msb><lsb>1</lsb>
+              <description>JPEG Codec Unit Software Reset - Controls the JPEG codec unit reset with software.</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SWRSTCR3</name>
+          <description>Software Reset Control Register 3 (SWRSTCR3) - SWRSTCR3 is an 8-bit readable/writable register that controls a software reset for each module.</description>
+          <addressOffset>0x00468</addressOffset>
+          <width>8</width>
+          <size>8</size>
+          <fields>
+            <field>
+              <name>SRST32</name><msb>2</msb><lsb>2</lsb>
+              <description>OpenVGTM-Compliant Renesas Graphics Processor Software Reset Controls the OpenVGTM-compliant Renesas graphics processor reset with software.</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SYSCR1</name>
+          <description>
+            System Control Register 1 (SYSCR1) - SYSCR1 is an 8-bit readable/writable register that enables or disables access (read and write) to a specified page in the large-capacity on-chip RAM.
+
+            When a VRAMEn (n = 0 to 4) bit in SYSCR1 is set to 1, access to page n is enabled. When a VRAMEn bit is cleared to 0, page n cannot be accessed. In this case, an undefined value is returned when reading data or fetching an instruction from page n, and writing to page n is ignored. The initial value of a VRAMEn bit is 1.
+
+            SYSCR1 should be set with a program located in an area other than the large-capacity on-chip RAM. Furthermore, an instruction to read SYSCR1 should be located immediately after the instruction to write to SYSCR1. If not, normal access is not guaranteed.
+          </description>
+          <addressOffset>0x00400</addressOffset>
+          <width>8</width>
+          <size>8</size>
+          <fields>
+            <field>
+              <name>VRAME4</name><msb>4</msb><lsb>4</lsb>
+              <description>RAM Enable 4 (corresponding area: page 4 in large-capacity on-chip RAM)</description>
+            </field>
+            <field>
+              <name>VRAME3</name><msb>3</msb><lsb>3</lsb>
+              <description>RAM Enable 3 (corresponding area: page 3 in large-capacity on-chip RAM)</description>
+            </field>
+            <field>
+              <name>VRAME2</name><msb>2</msb><lsb>2</lsb>
+              <description>RAM Enable 2 (corresponding area: page 2 in large-capacity on-chip RAM)</description>
+            </field>
+            <field>
+              <name>VRAME1</name><msb>1</msb><lsb>1</lsb>
+              <description>RAM Enable 1 (corresponding area: page 1 in large-capacity on-chip RAM)</description>
+            </field>
+            <field>
+              <name>VRAME0</name><msb>0</msb><lsb>0</lsb>
+              <description>RAM Enable 0 (corresponding area: page 0 in large-capacity on-chip RAM)</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SYSCR2</name>
+          <description>
+            System Control Register 2 (SYSCR2) - SYSCR2 is an 8-bit readable/writable register that enables or disables writing to a specified page in the large-capacity on-chip RAM.
+
+            When a VRAMWEn (n = 0 to 4) bit in SYSCR2 is set to 1, writing to page n is enabled. When a VRAMWEn bit is cleared to 0, writing to page n is ignored. The initial value of a VRAMWEn bit is 1.
+
+            SYSCR2 should be set with a program located in an area other than the large-capacity on-chip RAM. Furthermore, an instruction to read SYSCR2 should be located immediately after the instruction to write to SYSCR2. If not, normal access is not guaranteed.
+          </description>
+          <addressOffset>0x00404</addressOffset>
+          <width>8</width>
+          <size>8</size>
+          <fields>
+            <field>
+              <name>VRAMWE4</name><msb>4</msb><lsb>4</lsb>
+              <description>RAM Write Enable 4 (corresponding area: page 4 in large-capacity on-chip RAM)</description>
+            </field>
+            <field>
+              <name>VRAMWE3</name><msb>3</msb><lsb>3</lsb>
+              <description>RAM Write Enable 3 (corresponding area: page 3 in large-capacity on-chip RAM)</description>
+            </field>
+            <field>
+              <name>VRAMWE2</name><msb>2</msb><lsb>2</lsb>
+              <description>RAM Write Enable 2 (corresponding area: page 2 in large-capacity on-chip RAM)</description>
+            </field>
+            <field>
+              <name>VRAMWE1</name><msb>1</msb><lsb>1</lsb>
+              <description>RAM Write Enable 1 (corresponding area: page 1 in large-capacity on-chip RAM)</description>
+            </field>
+            <field>
+              <name>VRAMWE0</name><msb>0</msb><lsb>0</lsb>
+              <description>RAM Write Enable 0 (corresponding area: page 0 in large-capacity on-chip RAM)</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SYSCR3</name>
+          <description>
+            System Control Register 3 (SYSCR3) - SYSCR3 is an 8-bit readable/writable register that enables or disables writing to a specified page in the on-chip data- retention RAM.
+
+            When a RRAMWEn (n = 0 to 3) bit in SYSCR3 is set to 1, writing to page n is enabled. When a RRAMWEn bit is cleared to 0, writing to page n is ignored. The initial value of a RRAMWEn bit is 0.
+
+            SYSCR3 should be set with a program located in an area other than the on-chip data-retention RAM.
+          </description>
+          <addressOffset>0x00408</addressOffset>
+          <width>8</width>
+          <size>8</size>
+          <fields>
+            <field>
+              <name>RRAMWE3</name><msb>3</msb><lsb>3</lsb>
+              <description>RAM Write Enable 3 (corresponding area: page 3 in on-chip data- retention RAM)</description>
+            </field>
+            <field>
+              <name>RRAMWE2</name><msb>2</msb><lsb>2</lsb>
+              <description>RAM Write Enable 2 (corresponding area: page 2 in on-chip data- retention RAM)</description>
+            </field>
+            <field>
+              <name>RRAMWE1</name><msb>1</msb><lsb>1</lsb>
+              <description>RAM Write Enable 1 (corresponding area: page 1 in on-chip data- retention RAM)</description>
+            </field>
+            <field>
+              <name>RRAMWE0</name><msb>0</msb><lsb>0</lsb>
+              <description>RAM Write Enable 0 (corresponding area: page 0 in on-chip data- retention RAM)</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CPUSTS</name>
+          <description>CPU Status Register (CPUSTS) - CPUSTS is an 8-bit readable register that indicates the status of the CPU.</description>
+          <addressOffset>0x00018</addressOffset>
+          <width>8</width>
+          <size>8</size>
+          <access>read-only</access>
+          <fields>
+            <field>
+              <name>ISBUSY</name><msb>4</msb><lsb>4</lsb>
+              <description>State during Changing of the Frequency of CPU and Return from Software Standby - Indicates that the frequency of CPU is being changed or that return from software standby is in progress. Do not execute a WFI instruction while this bit is 1.</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>STBREQ1</name>
+          <description>Standby Request Register 1 (STBREQ1) - This register is used to request notification of whether a CPU or peripheral module is ready for standby. The CPU or peripheral module returns a standby acknowledgement on receipt of a request for notification if it is ready for standby.</description>
+          <addressOffset>0x00030</addressOffset>
+          <width>8</width>
+          <size>8</size>
+          <fields>
+            <field>
+              <name>STBRQ15</name><msb>5</msb><lsb>5</lsb>
+              <description>Standby Request to CoreSight</description>
+            </field>
+            <field>
+              <name>STBRQ13</name><msb>3</msb><lsb>3</lsb>
+              <description>Standby Request to JPEG Codec Unit</description>
+            </field>
+            <field>
+              <name>STBRQ12</name><msb>2</msb><lsb>2</lsb>
+              <description>Standby Request to EthernetAVB</description>
+            </field>
+            <field>
+              <name>STBRQ10</name><msb>0</msb><lsb>0</lsb>
+              <description>Standby Request to Capture Engine Unit</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>STBREQ2</name>
+          <description>Standby Request Register 2 (STBREQ2) - This register is used to request notification of whether a peripheral module is ready for standby. The peripheral module returns a standby acknowledgement on receipt of a request for notification if it is ready for standby.</description>
+          <addressOffset>0x00034</addressOffset>
+          <width>8</width>
+          <size>8</size>
+          <fields>
+            <field>
+              <name>STBRQ27</name><msb>7</msb><lsb>7</lsb>
+              <description>Standby Request to the media local bus</description>
+            </field>
+            <field>
+              <name>STBRQ26</name><msb>6</msb><lsb>6</lsb>
+              <description>Standby Request to Ethernet Controller</description>
+            </field>
+            <field>
+              <name>STBRQ25</name><msb>5</msb><lsb>5</lsb>
+              <description>Standby Request to Channel 0 of Video Display Controller 5</description>
+            </field>
+            <field>
+              <name>STBRQ24</name><msb>4</msb><lsb>4</lsb>
+              <description>Standby Request to Channel 1 of Video Display Controller 5</description>
+            </field>
+            <field>
+              <name>STBRQ23</name><msb>3</msb><lsb>3</lsb>
+              <description>Standby Request to Channel 0 of Image Renderer</description>
+            </field>
+            <field>
+              <name>STBRQ22</name><msb>2</msb><lsb>2</lsb>
+              <description>Standby Request to Channel 1 of Image Renderer</description>
+            </field>
+            <field>
+              <name>STBRQ21</name><msb>1</msb><lsb>1</lsb>
+              <description>Standby Request to Display Image Renderer</description>
+            </field>
+            <field>
+              <name>STBRQ20</name><msb>0</msb><lsb>0</lsb>
+              <description>Standby Request to OpenVGTM-Compliant Renesas Graphics Processor</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>STBACK1</name>
+          <description>Standby Acknowledge Register 1 (STBACK1) - This register is used to provide notification that a CPU or peripheral module is in the standby ready state. The CPU or peripheral module returns a standby acknowledgement on reception of a standby notification request if it is ready for standby. This register is a read-only register.</description>
+          <addressOffset>0x00040</addressOffset>
+          <width>8</width>
+          <size>8</size>
+          <access>read-only</access>
+          <fields>
+            <field>
+              <name>STBAK15</name><msb>5</msb><lsb>5</lsb>
+              <description>Standby Acknowledgement from CoreSight</description>
+            </field>
+            <field>
+              <name>STBAK13</name><msb>3</msb><lsb>3</lsb>
+              <description>Standby Acknowledgement from JPEG Codec Unit</description>
+            </field>
+            <field>
+              <name>STBAK12</name><msb>2</msb><lsb>2</lsb>
+              <description>Standby Acknowledgement from EthernetAVB</description>
+            </field>
+            <field>
+              <name>STBAK10</name><msb>0</msb><lsb>0</lsb>
+              <description>Standby Acknowledgement from Capture Engine Unit</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>STBACK2</name>
+          <description>Standby Acknowledge Register 2 (STBACK2) - This register is used to provide notification that a peripheral module is in the standby ready state. The peripheral module returns a standby acknowledgement on reception of a standby notification request if it is ready for standby. This register is a read-only register.</description>
+          <addressOffset>0x00044</addressOffset>
+          <width>8</width>
+          <size>8</size>
+          <fields>
+            <field>
+              <name>STBAK27</name><msb>7</msb><lsb>7</lsb>
+              <description>Standby Acknowledgement from the media local bus</description>
+            </field>
+            <field>
+              <name>STBAK26</name><msb>6</msb><lsb>6</lsb>
+              <description>Standby Acknowledgement from Ethernet Controller</description>
+            </field>
+            <field>
+              <name>STBAK25</name><msb>5</msb><lsb>5</lsb>
+              <description>Standby Acknowledgement from Channel 0 of Video Display Controller 5</description>
+            </field>
+            <field>
+              <name>STBAK24</name><msb>4</msb><lsb>4</lsb>
+              <description>Standby Acknowledgement from Channel 1 of Video Display Controller 5</description>
+            </field>
+            <field>
+              <name>STBAK23</name><msb>3</msb><lsb>3</lsb>
+              <description>Standby Acknowledgement from Channel 0 of Image Renderer</description>
+            </field>
+            <field>
+              <name>STBAK22</name><msb>2</msb><lsb>2</lsb>
+              <description>Standby Acknowledgement from Channel 1 of Image Renderer</description>
+            </field>
+            <field>
+              <name>STBAK21</name><msb>1</msb><lsb>1</lsb>
+              <description>Standby Acknowledgement from Display Image Renderer</description>
+            </field>
+            <field>
+              <name>STBAK20</name><msb>0</msb><lsb>0</lsb>
+              <description>Standby Acknowledgement from OpenVGTM-Compliant Renesas Graphics Processor</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RRAMKP</name>
+          <description>
+            On-Chip Data-Retention RAM Area Setting Register (RRAMKP) - RRAMKP is an 8-bit readable/writable register that selects whether the contents of the corresponding area of the on-chip data-retention RAM are retained or not in deep standby mode.
+
+            When the RRAMKP3 to RRAMKP0 bits are set to 1, the contents of the corresponding area of the on-chip data-retention RAM are retained in deep standby mode. When these bits are cleared to 0, the contents of the corresponding area of the on-chip data-retention RAM are not retained in deep standby mode.
+          </description>
+          <addressOffset>0x11800</addressOffset>
+          <width>8</width>
+          <size>8</size>
+          <fields>
+            <field>
+              <name>RRAMKP3</name><msb>3</msb><lsb>3</lsb>
+              <description>On-Chip Data-Retention RAM Storage Area 3 (corresponding area: page 3 in on-chip data-retention RAM)</description>
+            </field>
+            <field>
+              <name>RRAMKP2</name><msb>2</msb><lsb>2</lsb>
+              <description>On-Chip Data-Retention RAM Storage Area 2 (corresponding area: page 2 in on-chip data-retention RAM)</description>
+            </field>
+            <field>
+              <name>RRAMKP1</name><msb>1</msb><lsb>1</lsb>
+              <description>On-Chip Data-Retention RAM Storage Area 1 (corresponding area: page 1 in on-chip data-retention RAM)</description>
+            </field>
+            <field>
+              <name>RRAMKP0</name><msb>0</msb><lsb>0</lsb>
+              <description>On-Chip Data-Retention RAM Storage Area 0 (corresponding area: page 0 in on-chip data-retention RAM)</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DSCTR</name>
+          <description>
+            Deep Standby Control Register (DSCTR) - DSCTR is an 8-bit readable/writable register that selects whether the states of the external memory control pins are retained or not when returning from deep standby mode and specifies the method to start the LSI.
+
+            The following setting is prohibited: (EBUSKEEPE, RAMBOOT) = (1, 0).
+          </description>
+          <addressOffset>0x11802</addressOffset>
+          <width>8</width>
+          <size>8</size>
+          <fields>
+            <field>
+              <name>EBUSKEEPE</name><msb>7</msb><lsb>7</lsb>
+              <description>Retention of External Memory Control Pin State</description>
+            </field>
+            <field>
+              <name>RAMBOOT</name><msb>6</msb><lsb>6</lsb>
+              <description>Selection of Method after Returning from Deep Standby Mode Selects an activation method after returning from deep standby mode.</description>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>RESET</name>
+                  <description>Activated according to the boot mode specified for a reset.</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>RRAM</name>
+                  <description>The program is read from the on-chip data-retention RAM. Instruction fetch from H'20000000</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DSSSR</name>
+          <description>Deep Standby Cancel Source Select Register (DSSSR) - DSSSR is a 16-bit readable/writable register that consists of the bits for selecting a source to cancel deep standby mode. The realtime clock alarm interrupt or change on the pins for canceling (P2_12, P2_15, P3_1, P3_3, P3_9, P5_9, P6_2, P6_4, P7_8, P8_2, P8_7, and P9_1) can be selected as a cancel source. The pins for canceling can be used for canceling deep standby, regardless of pin function settings in the general I/O port.</description>
+          <addressOffset>0x11804</addressOffset>
+          <width>16</width>
+          <size>16</size>
+          <fields>
+            <field>
+              <name>P6_2</name><msb>14</msb><lsb>14</lsb>
+              <description>Cancel by Change on P6_2</description>
+            </field>
+            <field>
+              <name>P3_9</name><msb>13</msb><lsb>13</lsb>
+              <description>Cancel by Change on P3_9</description>
+            </field>
+            <field>
+              <name>P3_1</name><msb>12</msb><lsb>12</lsb>
+              <description>Cancel by Change on P3_1</description>
+            </field>
+            <field>
+              <name>P2_12</name><msb>11</msb><lsb>11</lsb>
+              <description>Cancel by Change on P2_12</description>
+            </field>
+            <field>
+              <name>P8_7</name><msb>10</msb><lsb>10</lsb>
+              <description>Cancel by Change on P8_7</description>
+            </field>
+            <field>
+              <name>P3_3</name><msb>9</msb><lsb>9</lsb>
+              <description>Cancel by Change on P3_3</description>
+            </field>
+            <field>
+              <name>NMI</name><msb>8</msb><lsb>8</lsb>
+              <description>Cancel by Change on NMI</description>
+            </field>
+            <field>
+              <name>RTCAR</name><msb>6</msb><lsb>6</lsb>
+              <description>Cancel by Realtime Clock Alarm Interrupt</description>
+            </field>
+            <field>
+              <name>P6_4</name><msb>5</msb><lsb>5</lsb>
+              <description>Cancel by Change on P6_4</description>
+            </field>
+            <field>
+              <name>P5_9</name><msb>4</msb><lsb>4</lsb>
+              <description>Cancel by Change on P5_9</description>
+            </field>
+            <field>
+              <name>P7_8</name><msb>3</msb><lsb>3</lsb>
+              <description>Cancel by Change on P7_8</description>
+            </field>
+            <field>
+              <name>P2_15</name><msb>2</msb><lsb>2</lsb>
+              <description>Cancel by Change on P2_15</description>
+            </field>
+            <field>
+              <name>P9_1</name><msb>1</msb><lsb>1</lsb>
+              <description>Cancel by Change on P9_1</description>
+            </field>
+            <field>
+              <name>P8_2</name><msb>0</msb><lsb>0</lsb>
+              <description>Cancel by Change on P8_2</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DSESR</name>
+          <description>Deep Standby Cancel Edge Select Register (DSESR) - DSESR is a 16-bit readable/writable register that consists of the bits for selecting an edge to be detected for the pin specified as a deep standby cancel source with DSSSR. This register setting is always valid for canceling deep standby, regardless of the interrupt controller setting.</description>
+          <addressOffset>0x11806</addressOffset>
+          <width>16</width>
+          <size>16</size>
+          <fields>
+            <field>
+              <name>P6_2E</name><msb>14</msb><lsb>14</lsb>
+              <description>P6_2 Edge Detection</description>
+            </field>
+            <field>
+              <name>P3_9E</name><msb>13</msb><lsb>13</lsb>
+              <description>P3_9 Edge Detection</description>
+            </field>
+            <field>
+              <name>P3_1E</name><msb>12</msb><lsb>12</lsb>
+              <description>P3_1 Edge Detection</description>
+            </field>
+            <field>
+              <name>P2_12E</name><msb>11</msb><lsb>11</lsb>
+              <description>P2_12 Edge Detection</description>
+            </field>
+            <field>
+              <name>P8_7E</name><msb>10</msb><lsb>10</lsb>
+              <description>P8_7 Edge Detection</description>
+            </field>
+            <field>
+              <name>P3_3E</name><msb>9</msb><lsb>9</lsb>
+              <description>P3_3 Edge Detection</description>
+            </field>
+            <field>
+              <name>NMIE</name><msb>8</msb><lsb>8</lsb>
+              <description>NMI Edge Detection</description>
+            </field>
+            <field>
+              <name>P6_4E</name><msb>5</msb><lsb>5</lsb>
+              <description>P6_4 Edge Detection</description>
+            </field>
+            <field>
+              <name>P5_9E</name><msb>4</msb><lsb>4</lsb>
+              <description>P5_9 Edge Detection</description>
+            </field>
+            <field>
+              <name>P7_8E</name><msb>3</msb><lsb>3</lsb>
+              <description>P7_8 Edge Detection</description>
+            </field>
+            <field>
+              <name>P2_15E</name><msb>2</msb><lsb>2</lsb>
+              <description>P2_15 Edge Detection</description>
+            </field>
+            <field>
+              <name>P9_1E</name><msb>1</msb><lsb>1</lsb>
+              <description>P9_1 Edge Detection</description>
+            </field>
+            <field>
+              <name>P8_2E</name><msb>0</msb><lsb>0</lsb>
+              <description>P8_2 Edge Detection</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DSFR</name>
+          <description>
+            Deep Standby Cancel Source Flag Register (DSFR) - DSFR is a 16-bit readable/writable register composed of two types of bits. One is the flag that confirms which source canceled deep standby mode. The other is the bit that releases the state of pins after canceling deep standby mode. When deep standby mode is canceled by an interrupt (NMI or realtime clock alarm interrupt) and changes on the pins for canceling, this register retains the previous data although power-on reset exception handling is executed. When deep standby mode is canceled by a power-on reset, this register is initialized to H'0000.
+
+            All flags must be cleared immediately before transition to deep standby mode.
+          </description>
+          <addressOffset>0x11808</addressOffset>
+          <width>16</width>
+          <size>16</size>
+          <fields>
+            <field>
+              <name>IOKEEP</name><msb>15</msb><lsb>15</lsb>
+              <description>
+                Release of Pin State Retention - Releases the retention of the pin state after canceling deep standby mode.
+
+                0: Pin state not retained
+
+                [Clearing condition]
+                - Writing 0 after reading 1
+
+                1: Pin state retained
+
+                [Setting condition]
+                - When deep standby mode is entered
+              </description>
+            </field>
+            <field>
+              <name>P6_2F</name><msb>14</msb><lsb>14</lsb>
+              <description>P6_2 Flag</description>
+            </field>
+            <field>
+              <name>P3_9F</name><msb>13</msb><lsb>13</lsb>
+              <description>P3_9 Flag</description>
+            </field>
+            <field>
+              <name>P3_1F</name><msb>12</msb><lsb>12</lsb>
+              <description>P3_1 Flag</description>
+            </field>
+            <field>
+              <name>P2_12F</name><msb>11</msb><lsb>11</lsb>
+              <description>P2_12 Flag</description>
+            </field>
+            <field>
+              <name>P8_7F</name><msb>10</msb><lsb>10</lsb>
+              <description>P8_7 Flag</description>
+            </field>
+            <field>
+              <name>P3_3F</name><msb>9</msb><lsb>9</lsb>
+              <description>P3_3 Flag</description>
+            </field>
+            <field>
+              <name>NMIF</name><msb>8</msb><lsb>8</lsb>
+              <description>NMI Flag</description>
+            </field>
+            <field>
+              <name>RTCARF</name><msb>6</msb><lsb>6</lsb>
+              <description>RTCAR Flag</description>
+            </field>
+            <field>
+              <name>P6_4F</name><msb>5</msb><lsb>5</lsb>
+              <description>P6_4 Flag</description>
+            </field>
+            <field>
+              <name>P5_9F</name><msb>4</msb><lsb>4</lsb>
+              <description>P5_9 Flag</description>
+            </field>
+            <field>
+              <name>P7_8F</name><msb>3</msb><lsb>3</lsb>
+              <description>P7_8 Flag</description>
+            </field>
+            <field>
+              <name>P2_15F</name><msb>2</msb><lsb>2</lsb>
+              <description>P2_15 Flag</description>
+            </field>
+            <field>
+              <name>P9_1F</name><msb>1</msb><lsb>1</lsb>
+              <description>P9_1 Flag</description>
+            </field>
+            <field>
+              <name>P8_2F</name><msb>0</msb><lsb>0</lsb>
+              <description>P8_2 Flag</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>XTALCTR</name>
+          <description>
+            XTAL Crystal Oscillator Gain Control Register (XTALCTR) - XTALCTR is an 8-bit readable/writable register that controls the gain of the crystal oscillator for XTAL and the realtime clock.
+
+            If the realtime clock uses the EXTAL input, the GAIN0 bit retains the previous value when software standby mode or deep standby mode is canceled by a source other than a power-on reset. If the realtime clock does not use the EXTAL input, this bit is initialized to 0 when software standby or deep standby mode is entered.
+
+            If the realtime clock uses the RTC_X1 or RTC_X3 input, the GAIN1 bit retains the previous value when software standby mode or deep standby mode is canceled by a source other than a power-on reset. If the realtime clock does not use the RTC_X1 or RTC_X3 input, this bit is initialized to 0 when software standby or deep standby mode is entered. This bit is initialized to H'00 when software standby or deep standby mode is canceled by a power-on reset.
+          </description>
+          <addressOffset>0x11810</addressOffset>
+          <width>8</width>
+          <size>8</size>
+          <fields>
+            <field>
+              <name>GAIN1</name><msb>1</msb><lsb>1</lsb>
+              <description>Realtime Clock Crystal Oscillator (RTC_X3 or RTC_X4 Pin) Gain Select</description>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>LARGE</name>
+                  <description>Large gain</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>SMALL</name>
+                  <description>Small gain</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>GAIN0</name><msb>0</msb><lsb>0</lsb>
+              <description>XTAL Crystal Oscillator (EXTAL or XTAL Pin) Gain Select</description>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>LARGE</name>
+                  <description>Large gain</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>SMALL</name>
+                  <description>Small gain</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+    <!-- POWER -->
   </peripherals>
 </device>

@@ -62,7 +62,7 @@ The library is only updated passively and therefore there's no particular schedu
  - [ ] Motor Control PWM Timer
  - [ ] On-Chip RAM
  - [x] **Ports**
- - [ ] Power-Down Modes
+ - [x] **Power-Down Modes**
  - [ ] Debugger Interface
  - [x] ~~EthernetAVB~~ *NDA required*
 
