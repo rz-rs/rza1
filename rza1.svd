@@ -12,6 +12,125 @@
   <resetMask>0xFFFFFFFF</resetMask>
 
   <peripherals>
+    <!-- CPG -->
+    <peripheral>
+      <name>CPG</name>
+      <baseAddress>0xfcfe0010</baseAddress>
+      <groupName>Clock Pulse Generator</groupName>
+      <description>Clock Pulse Generator</description>
+      <registers>
+        <register>
+          <name>FRQCR0</name>
+          <description>Frequency Control Register (FRQCR) - FRQCR is a 16-bit readable/writable register used to specify whether a clock is output from the CKIO pin during normal operation mode, change of gain of crystal oscillator for the XTAL pin, software standby mode, deep standby mode, and standby mode cancellation. The register specifies the frequency division ratio for the CPU clock (Iφ). FRQCR can be accessed in 16-bit units.</description>
+          <addressOffset>0x000</addressOffset>
+          <width>16</width>
+          <size>16</size>
+          <resetValue>0x0335</resetValue>
+          <fields>
+            <field>
+              <name>CKOEN2</name>
+              <msb>14</msb><lsb>14</lsb>
+              <access>read-only</access>
+              <description>Clock Output Enable 2 - Specifies whether the CKIO pin outputs clock signals or is fixed to the low level when the gain of the crystal oscillator for the XTAL pin is changed. If this bit is set to 1, the CKIO pin is fixed to the low level when the gain of the crystal oscillator for the XTAL pin is changed. Therefore, the malfunction of an external circuit caused by an unstable CKIO clock while changing the gain of the crystal oscillator for the XTAL pin can be prevented.</description>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>UNSTABLE_CLOCK_OUT</name>
+                  <description>Unstable clock output</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>LOW_OUT</name>
+                  <description>Low-level output</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CKOEN</name>
+              <msb>13</msb><lsb>12</lsb>
+              <description>
+                Clock Output Enable - These bits specify whether the CKIO pin outputs clock signals, or is set to a fixed level or high impedance (Hi-Z) during normal operation mode, deep standby mode, software standby mode, or cancellation of standby mode.
+
+                If these bits are set to 01, the CKIO pin is fixed at low during deep standby mode, software standby mode, or cancellation of software standby mode. Therefore, the malfunction of an external circuit caused by an unstable CKIO clock during cancellation of software standby mode can be prevented.
+              </description>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>OUT_HIZ_HIZ</name>
+                  <description>Normal operation: output, Software Standy Mode: Hi-Z, Deep Standby Mode: Hi-Z</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>OUT_LOW_LOW</name>
+                  <description>Normal operation: output, Software Standy Mode: low-level output, Deep Standby Mode: low-level output</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>OUT_OUT_OUT</name>
+                  <description>Normal operation: output, Software Standy Mode: unstable clock output, Deep Standby Mode: low-level for high-level output</description>
+                  <value>2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>HIZ_HIZ_HIZ</name>
+                  <description>Normal operation: Hi-Z, Software Standy Mode: Hi-Z, Deep Standby Mode: Hi-Z</description>
+                  <value>3</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>IFC</name>
+              <msb>9</msb><lsb>8</lsb>
+              <description>CPU Clock Frequency Division Ratio - These bits specify the frequency division ratio of the CPU clock with respect to the output frequency of PLL circuit. Note: See section 6.5.1.</description>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>1</name>
+                  <description>1/1 time</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>2_OVER_3</name>
+                  <description>2/3 time</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>1_OVER_3</name>
+                  <description>1/3 time</description>
+                  <value>3</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>FRQCR2</name>
+          <description>Frequency Control Register 2 (FRQCR2) - FRQCR2 is a 16-bit readable/writable register used to specify the frequency division ratio for the image processing clock (Gφ). FRQCR2 can be accessed in 16-bit units.</description>
+          <addressOffset>0x004</addressOffset>
+          <width>16</width>
+          <size>16</size>
+          <resetValue>0x0003</resetValue>
+          <fields>
+            <field>
+              <name>GFC</name>
+              <msb>1</msb><lsb>0</lsb>
+              <description>Image Processing Clock Frequency Division Ratio - These bits specify the frequency division ratio of the image processing clock with respect to the output frequency of PLL circuit. Note: See section 6.5.1.</description>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>2_OVER_3</name>
+                  <description>2/3 time</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>1_OVER_3</name>
+                  <description>1/3 time</description>
+                  <value>3</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+    <!-- CPG -->
+
     <!-- ICTL -->
     <peripheral>
       <name>ICTL</name>

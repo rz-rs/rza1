@@ -12,7 +12,7 @@ The library is only updated passively and therefore there's no particular schedu
 
  - [ ] Secondary Cache (L2C-310)
  - [ ] LSI Internal Bus
- - [ ] Clock Pulse Generator
+ - [x] **Clock Pulse Generator**
  - [ ] Interrupt Controller (PL390)
  - [x] **Interrupt Controller (Miscellaneous Registers)**
  - [ ] Bus State Contrller
