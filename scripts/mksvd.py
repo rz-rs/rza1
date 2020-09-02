@@ -19,7 +19,7 @@ class Struct(NamedTuple):
 
 all_peripherals: Dict[str, Peripheral] = {}
 all_peripherals_list: List[Peripheral] = []
-all_field_masks: Dict[str, int] = {}
+all_field_masks: Dict[str, Dict[str, int]] = {}
 all_structs: Dict[str, Struct] = {}
 
 COMMENT_RE = re.compile(r'/\*.*?\*/', re.DOTALL)
@@ -29,8 +29,9 @@ PERIPHERAL_RE = re.compile(
     r'#define\s+([A-Z0-9_]+)\s+\(\*\(struct\s+([a-z0-9_+]+)\s*\*\)0x([A-F0-9]+)uL\)')
 
 # e.g., `#define MTU2_TIORH_4_IOA     (0x0Fu)`
-FIELD_MARK_RE = re.compile(
-    r'#define\s+([A-Z0-9_]+)\s+\(0x([0-9A-F]+)uL\)')
+#                ^^^^^^^^^^ ^^^^^
+FIELD_MASK_RE = re.compile(
+    r'#define\s+([A-Z0-9]+_[a-zA-Z0-9]+)_([a-zA-Z0-9_]+)\s+\(0x([0-9A-F]+)uL\)')
 
 STRUCT_RE = re.compile(
     r'typedef struct ([0-9a-z_]+)\s*\{(.*?)\}', re.DOTALL)
@@ -57,11 +58,16 @@ for header_file in header_files:
             base=match[2])
         all_peripherals_list.append(all_peripherals[name])
 
-    matches = FIELD_MARK_RE.findall(source)
+    matches = FIELD_MASK_RE.findall(source)
     for match in matches:
-        name = match[0]
-        mask = int(match[1], 16)
-        all_field_masks[name] = mask
+        peripheral_name = match[0]
+        name = match[1]
+        mask = int(match[2], 16)
+        if mask == 0:
+            raise RuntimeError("Field '%s_%s' has null mask" % (peripheral_name, name))
+        if peripheral_name not in all_field_masks:
+            all_field_masks[peripheral_name] = {}
+        all_field_masks[peripheral_name][name] = mask
 
     matches = STRUCT_RE.findall(source)
     for match in matches:
@@ -117,6 +123,13 @@ def add_element(parent, name: str, value: str):
     e.appendChild(svd_doc.createTextNode(value))
     parent.appendChild(e)
 
+def int_msb(i: int) -> int:
+    return i.bit_length() - 1
+def int_lsb(i: int) -> int:
+    if i & 1 == 1:
+        return 0
+    else:
+        return int_lsb(i // 2) + 1
 
 add_element(svd_root, 'vendor', 'Renesas')
 add_element(svd_root, 'name', 'RZ/A1H')
@@ -161,7 +174,17 @@ for peripheral in all_peripherals_list:
         add_element(svd_register, 'width', str(field.width))
         add_element(svd_register, 'size', str(field.width))
 
-        # TODO: generate fields
+        field_masks = all_field_masks.get(peripheral.name + '_' + field.name)
+        if field_masks:
+            svd_fields = svd_doc.createElement('fields')
+            svd_register.appendChild(svd_fields)
+            for subfield_name, subfield_mask in field_masks.items():
+                svd_field = svd_doc.createElement('field')
+                svd_fields.appendChild(svd_field)
+
+                add_element(svd_field, 'name', subfield_name)
+                add_element(svd_field, 'msb', str(int_msb(subfield_mask)))
+                add_element(svd_field, 'lsb', str(int_lsb(subfield_mask)))
 
 with open('rza1.svd', 'w') as f:
     svd_doc.writexml(f, addindent='  ', newl='\n')
