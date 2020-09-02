@@ -1,2 +1,7 @@
 /target
 Cargo.lock
+
+# svd2rust
+/device.x
+/src
+/build.rs
