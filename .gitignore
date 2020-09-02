@@ -1,6 +1,9 @@
 /target
 Cargo.lock
 
+# mksvd.py
+/rza1.svd
+
 # svd2rust
 /device.x
 /src

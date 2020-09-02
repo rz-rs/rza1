@@ -8,7 +8,7 @@ keywords = ["arm", "register", "peripheral"]
 categories = ["embedded", "hardware-support", "no-std"]
 description = "Peripheral access API for the Renesas RZ/A1 MPU family"
 repository = "https://github.com/yvt/rust-rza1"
-exclude = ["*.svd", "*.sh"]
+include = ["/src", "/README.md"]
 
 [dependencies]
 bare-metal = "0.1.0"
