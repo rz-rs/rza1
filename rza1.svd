@@ -20,7 +20,7 @@
       <description>Clock Pulse Generator</description>
       <registers>
         <register>
-          <name>FRQCR0</name>
+          <name>FRQCR</name>
           <description>Frequency Control Register (FRQCR) - FRQCR is a 16-bit readable/writable register used to specify whether a clock is output from the CKIO pin during normal operation mode, change of gain of crystal oscillator for the XTAL pin, software standby mode, deep standby mode, and standby mode cancellation. The register specifies the frequency division ratio for the CPU clock (Iφ). FRQCR can be accessed in 16-bit units.</description>
           <addressOffset>0x000</addressOffset>
           <width>16</width>

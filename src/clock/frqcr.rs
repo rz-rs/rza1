@@ -6,7 +6,7 @@ pub struct R {
 pub struct W {
     bits: u16,
 }
-impl super::FRQCR0 {
+impl super::FRQCR {
     #[doc = r" Modifies the contents of the register"]
     #[inline]
     pub fn modify<F>(&self, f: F)
