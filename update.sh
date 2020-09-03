@@ -9,6 +9,9 @@ svd2rust --target none -i rza1.svd
 form -i lib.rs -o src/ && rm lib.rs
 cargo fmt
 
+# allow `use ...::Deref` to be unused
+sed -E -i '' 's/#!\[deny\(warnings\)\]//' src/lib.rs
+
 # feature-gate each module
 ./scripts/featureify.py src/lib.rs
 rustfmt src/lib.rs # TODO: pass `--skip-children` when it's stable
