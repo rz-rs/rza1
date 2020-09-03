@@ -173,6 +173,8 @@ for peripheral in all_peripherals_list:
 
     if peripheral.name == 'ADC':
         stripped_prefixes = ['AD']
+    elif peripheral.name == 'LIN0':
+        stripped_prefixes = ['RLN3n']
 
     def strip_peripheral_name(name: str) -> str:
         for stripped_prefix in stripped_prefixes:

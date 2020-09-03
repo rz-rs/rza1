@@ -130,12 +130,12 @@ gen! {
         (ROMDEC.cromen, 0xE8005000),
         (ROMDEC.strmdout0, 0xE8005204),
         // 25. LIN Interface
-        (LIN0.rln3n_lwbr, 0xFCFE9000 + 0x01),
-        (LIN0.rln3n_ldbr1, 0xFCFE9000 + 0x18),
-        (LIN0.rln3n_ldbr8, 0xFCFE9000 + 0x1f),
-        (LIN1.rln3n_lwbr, 0xFCFE9800 + 0x01),
-        (LIN1.rln3n_ldbr1, 0xFCFE9800 + 0x18),
-        (LIN1.rln3n_ldbr8, 0xFCFE9800 + 0x1f),
+        (LIN0.lwbr, 0xFCFE9000 + 0x01),
+        (LIN0.ldbr1, 0xFCFE9000 + 0x18),
+        (LIN0.ldbr8, 0xFCFE9000 + 0x1f),
+        (LIN1.lwbr, 0xFCFE9800 + 0x01),
+        (LIN1.ldbr1, 0xFCFE9800 + 0x18),
+        (LIN1.ldbr8, 0xFCFE9800 + 0x1f),
         // 26. Ethernet Controller
         (ETHER.arstr, 0xE8204800),
         (ETHER.cssmr, 0xE82034EC),
