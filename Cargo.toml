@@ -52,7 +52,6 @@ vdc5 = []
 wdt = []
 
 [dependencies]
-bare-metal = "0.1.0"
 vcell = "0.1.0"
 
 [package.metadata.docs.rs]
