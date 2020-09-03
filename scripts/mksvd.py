@@ -31,7 +31,7 @@ PERIPHERAL_RE = re.compile(
 # e.g., `#define MTU2_TIORH_4_IOA     (0x0Fu)`
 #                ^^^^^^^^^^ ^^^^^
 FIELD_MASK_RE = re.compile(
-    r'#define\s+([A-Z0-9]+_[a-zA-Z0-9]+)_([a-zA-Z0-9_]+)\s+\(0x([0-9A-F]+)uL\)')
+    r'#define\s+([A-Z0-9]+_[a-zA-Z0-9]+)_([a-zA-Z0-9_]+)\s+\(0x([0-9A-F]+)uL?\)')
 
 STRUCT_RE = re.compile(
     r'typedef struct ([0-9a-z_]+)\s*\{(.*?)\}', re.DOTALL)
@@ -64,7 +64,8 @@ for header_file in header_files:
         name = match[1]
         mask = int(match[2], 16)
         if mask == 0:
-            raise RuntimeError("Field '%s_%s' has null mask" % (peripheral_name, name))
+            print("Field '%s_%s' has null mask, ignoring" % (peripheral_name, name))
+            continue
         if peripheral_name not in all_field_masks:
             all_field_masks[peripheral_name] = {}
         all_field_masks[peripheral_name][name] = mask
