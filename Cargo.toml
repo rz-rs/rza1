@@ -7,7 +7,7 @@ license = "CC0-1.0"
 keywords = ["arm", "register", "peripheral"]
 categories = ["embedded", "hardware-support", "no-std"]
 description = "Peripheral access API for the Renesas RZ/A1 MPU family"
-repository = "https://github.com/yvt/rust-rza1"
+repository = "https://github.com/rz-rs/rza1"
 include = ["/src", "/README.md"]
 
 [features]
