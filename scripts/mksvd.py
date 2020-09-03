@@ -171,6 +171,9 @@ for peripheral in all_peripherals_list:
         DIGIT_RE.sub('n', peripheral.name),
     ]
 
+    if peripheral.name == 'ADC':
+        stripped_prefixes = ['AD']
+
     def strip_peripheral_name(name: str) -> str:
         for stripped_prefix in stripped_prefixes:
             if name.startswith(stripped_prefix):
