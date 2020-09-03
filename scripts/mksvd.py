@@ -39,6 +39,8 @@ STRUCT_RE = re.compile(
 FIELD_RE = re.compile(r'(volatile uint|union iodefine_reg)(8|16|32)[0-9_]*_t\s+([a-zA-Z0-9_]+)')
 FIELD_PADDING_RE = re.compile(r'volatile uint8_t\s+dummy[0-9]*\[([0-9]+)\]')
 
+DIGIT_RE = re.compile(r'[0-9]+')
+
 for header_file in header_files:
     print(header_file)
 
@@ -162,6 +164,21 @@ for peripheral in all_peripherals_list:
         svd_peripheral.setAttribute('derivedFrom', pri_peripheral)
         continue
 
+    # Prefixes to remove from register names
+    # e.g., `OSTMnCNT` → `CNT`
+    stripped_prefixes = [
+        DIGIT_RE.sub('n', peripheral.name) + '_',
+        DIGIT_RE.sub('n', peripheral.name),
+    ]
+
+    def strip_peripheral_name(name: str) -> str:
+        for stripped_prefix in stripped_prefixes:
+            if name.startswith(stripped_prefix):
+                new_name = name[len(stripped_prefix):]
+                print("Stripping name '%s' → '%s'" % (name, new_name))
+                return new_name
+        return name
+
     svd_registers = svd_doc.createElement('registers')
     svd_peripheral.appendChild(svd_registers)
 
@@ -169,7 +186,9 @@ for peripheral in all_peripherals_list:
         svd_register = svd_doc.createElement('register')
         svd_registers.appendChild(svd_register)
 
-        add_element(svd_register, 'name', field.name)
+        name = strip_peripheral_name(field.name)
+
+        add_element(svd_register, 'name', name)
         add_element(svd_register, 'description', field.name)
         add_element(svd_register, 'addressOffset', str(field.offset))
         add_element(svd_register, 'width', str(field.width))
@@ -183,7 +202,7 @@ for peripheral in all_peripherals_list:
                 svd_field = svd_doc.createElement('field')
                 svd_fields.appendChild(svd_field)
 
-                add_element(svd_field, 'name', subfield_name)
+                add_element(svd_field, 'name', strip_peripheral_name(subfield_name))
                 add_element(svd_field, 'msb', str(int_msb(subfield_mask)))
                 add_element(svd_field, 'lsb', str(int_lsb(subfield_mask)))
 
