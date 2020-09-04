@@ -71,12 +71,12 @@ gen! {
         (RTC.r64cnt, 0xFCFF1000),
         (RTC.rfrh, 0xFCFF102A),
         // 14. Serial Communication Interface with FIFO
-        (SCIF0.scsmr, 0xE8007000),
-        (SCIF0.scfsr, 0xE8007010),
-        (SCIF0.scemr, 0xE8007028),
-        (SCIF7.scsmr, 0xE800a800),
-        (SCIF7.scfsr, 0xE800a810),
-        (SCIF7.scemr, 0xE800a828),
+        (SCIF0.smr, 0xE8007000),
+        (SCIF0.fsr, 0xE8007010),
+        (SCIF0.emr, 0xE8007028),
+        (SCIF7.smr, 0xE800a800),
+        (SCIF7.fsr, 0xE800a810),
+        (SCIF7.emr, 0xE800a828),
         // 15. Serial Communication Interface
         (SCIM0.smr, 0xE800B000),
         (SCIM0.secr, 0xE800B00D),

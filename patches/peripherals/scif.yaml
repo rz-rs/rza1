@@ -1,24 +1,24 @@
 SCIF0:
-  SCSMR:
+  SMR:
     CKS:
       DIVIDE_BY_1: [0, "P1ϕ"]
       DIVIDE_BY_4: [1, "P1ϕ/4"]
       DIVIDE_BY_16: [2, "P1ϕ/16"]
       DIVIDE_BY_64: [3, "P1ϕ/64"]
 
-  SCBRR:
+  BRR:
     D: [0x00, 0xff]
 
-  SCSCR:
+  SCR:
     CKE:
       INTERNAL_SCK_IN: [0, "Asynchronous mode: Internal clock, SCK pin used for input (input signal is ignored). Clock synchronous mode: Internal clock, SCK pin used for synchronous clock output"]
       INTERNAL_SCK_OUT: [1, "Internal clock, SCK pin used for synchronous clock output"]
       EXTERNAL_SCK_IN: [2, "External clock, SCK pin used for synchronous clock input"]
 
-  SCFTDR:
+  FTDR:
     D: [0x00, 0xff]
 
-  SCFCR:
+  FCR:
     RSTRG:
       _15: [0, "15 bytes"]
       _1: [1,"1 byte"]

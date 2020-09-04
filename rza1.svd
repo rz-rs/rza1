@@ -64755,7 +64755,7 @@
       <baseAddress>0xE8007000</baseAddress>
       <registers>
         <register>
-          <name>SCSMR</name>
+          <name>SMR</name>
           <description>SCSMR</description>
           <addressOffset>0</addressOffset>
           <width>16</width>
@@ -64795,7 +64795,7 @@
           </fields>
         </register>
         <register>
-          <name>SCBRR</name>
+          <name>BRR</name>
           <description>SCBRR</description>
           <addressOffset>4</addressOffset>
           <width>8</width>
@@ -64810,7 +64810,7 @@
           </fields>
         </register>
         <register>
-          <name>SCSCR</name>
+          <name>SCR</name>
           <description>SCSCR</description>
           <addressOffset>8</addressOffset>
           <width>16</width>
@@ -64850,7 +64850,7 @@
           </fields>
         </register>
         <register>
-          <name>SCFTDR</name>
+          <name>FTDR</name>
           <description>SCFTDR</description>
           <addressOffset>12</addressOffset>
           <width>8</width>
@@ -64865,7 +64865,7 @@
           </fields>
         </register>
         <register>
-          <name>SCFSR</name>
+          <name>FSR</name>
           <description>SCFSR</description>
           <addressOffset>16</addressOffset>
           <width>16</width>
@@ -64924,7 +64924,7 @@
           </fields>
         </register>
         <register>
-          <name>SCFRDR</name>
+          <name>FRDR</name>
           <description>SCFRDR</description>
           <addressOffset>20</addressOffset>
           <width>8</width>
@@ -64938,7 +64938,7 @@
           </fields>
         </register>
         <register>
-          <name>SCFCR</name>
+          <name>FCR</name>
           <description>SCFCR</description>
           <addressOffset>24</addressOffset>
           <width>16</width>
@@ -64984,7 +64984,7 @@
           </fields>
         </register>
         <register>
-          <name>SCFDR</name>
+          <name>FDR</name>
           <description>SCFDR</description>
           <addressOffset>28</addressOffset>
           <width>16</width>
@@ -65003,7 +65003,7 @@
           </fields>
         </register>
         <register>
-          <name>SCSPTR</name>
+          <name>SPTR</name>
           <description>SCSPTR</description>
           <addressOffset>32</addressOffset>
           <width>16</width>
@@ -65020,12 +65020,12 @@
               <lsb>1</lsb>
             </field>
             <field>
-              <name>SCKDT</name>
+              <name>KDT</name>
               <msb>2</msb>
               <lsb>2</lsb>
             </field>
             <field>
-              <name>SCKIO</name>
+              <name>KIO</name>
               <msb>3</msb>
               <lsb>3</lsb>
             </field>
@@ -65052,7 +65052,7 @@
           </fields>
         </register>
         <register>
-          <name>SCLSR</name>
+          <name>LSR</name>
           <description>SCLSR</description>
           <addressOffset>36</addressOffset>
           <width>16</width>
@@ -65066,7 +65066,7 @@
           </fields>
         </register>
         <register>
-          <name>SCEMR</name>
+          <name>EMR</name>
           <description>SCEMR</description>
           <addressOffset>40</addressOffset>
           <width>16</width>
