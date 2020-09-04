@@ -1,7 +1,12 @@
 all: src/lib.rs
 
-rza1.svd: scripts/mksvd.py system/iobitmasks/*.h system/iodefines/*.h
+HDR_FILES = system/iobitmasks/*.h system/iodefines/*.h
+YAML_FILES = patches/*.yaml patches/peripherals/*.yaml
+
+rza1.svd: scripts/mksvd.py $(HDR_FILES) $(YAML_FILES)
 	./scripts/mksvd.py system/iobitmasks/*.h system/iodefines/*.h
+	svd patch patches/rza1.yaml
+	mv rza1.svd.patched rza1.svd
 
 src/lib.rs: rza1.svd scripts/featureify.py
 	rm -rf src

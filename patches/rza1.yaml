@@ -1,0 +1,8 @@
+# See the svdtools documentation for full details of the patch file format.
+# <https://github.com/stm32-rs/svdtools>
+_svd: "../rza1.svd"
+
+_include:
+  - ./peripherals/cpg.yaml
+  - ./peripherals/ostm.yaml
+  - ./peripherals/scif.yaml

@@ -1,0 +1,26 @@
+OSTM0:
+  CMP:
+    CMP: [0x00000000, 0xffffffff]
+
+  CNT:
+    CNT: [0x00000000, 0xffffffff]
+
+  TE:
+    TE:
+      DISABLE: [0, "Counter disabled"]
+      ENABLE: [1, "Counter enabled"]
+
+  TS:
+    TS:
+      NOP: [0, "No effect"]
+      START: [1, "Starts the counter and sets TE = 1"]
+
+  TT:
+    TT:
+      NOP: [0, "No effect"]
+      STOP: [1, "Stops the counter and clears the TE bit"]
+
+  CTL:
+    MD1:
+      INTERVAL_TIMER: [0, "Interval timer mode"]
+      FREE_RUNNING_COMPARISON: [1, "Free-running comparison mode"]

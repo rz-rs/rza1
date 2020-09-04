@@ -1,0 +1,31 @@
+CPG:
+  FRQCR:
+    resetValue: 0x0335
+
+    CKOEN2:
+      UNSTABLE_CLOCK_OUT: [0, "Unstable clock output"]
+      LOW_OUT: [1, "Low-level output"]
+    CKOEN:
+      OUT_HIZ_HIZ:
+        - 0
+        - "Normal operation: output, Software Standy Mode: Hi-Z, Deep Standby Mode: Hi-Z"
+      OUT_LOW_LOW:
+        - 1
+        - "Normal operation: output, Software Standy Mode: low-level output, Deep Standby Mode: low-level output"
+      OUT_OUT_OUT:
+        - 2
+        - "Normal operation: output, Software Standy Mode: unstable clock output, Deep Standby Mode: low-level for high-level output"
+      HIZ_HIZ_HIZ:
+        - 3
+        - "Normal operation: Hi-Z, Software Standy Mode: Hi-Z, Deep Standby Mode: Hi-Z"
+    IFC:
+      _1: [0, "1/1 time"]
+      _2_OVER_3: [1, "2/3 time"]
+      _1_OVER_3: [3, "1/3 time"]
+
+  FRQCR2:
+    resetValue: 0x0003
+
+    GFC:
+      _2_OVER_3: [1, "2/3 time"]
+      _1_OVER_3: [3, "1/3 time"]
