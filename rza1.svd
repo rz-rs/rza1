@@ -1581,7 +1581,7 @@
               <name>IFC</name>
               <msb>9</msb>
               <lsb>8</lsb>
-            <enumeratedValues><name>IFC</name><usage>read-write</usage></enumeratedValues>
+            <enumeratedValues><name>IFC</name><usage>read-write</usage><enumeratedValue><name>UNITY</name><description>1/1 time</description><value>0</value></enumeratedValue><enumeratedValue><name>TWO_THIRD</name><description>2/3 time</description><value>1</value></enumeratedValue><enumeratedValue><name>ONE_THIRD</name><description>1/3 time</description><value>3</value></enumeratedValue></enumeratedValues>
             </field>
             <field>
               <name>CKOEN</name>
@@ -1608,7 +1608,7 @@
               <name>GFC</name>
               <msb>1</msb>
               <lsb>0</lsb>
-            <enumeratedValues><name>GFC</name><usage>read-write</usage></enumeratedValues>
+            <enumeratedValues><name>GFC</name><usage>read-write</usage><enumeratedValue><name>TWO_THIRD</name><description>2/3 time</description><value>1</value></enumeratedValue><enumeratedValue><name>ONE_THIRD</name><description>1/3 time</description><value>3</value></enumeratedValue></enumeratedValues>
             </field>
           </fields>
         </register>
@@ -64968,7 +64968,7 @@
               <name>TTRG</name>
               <msb>5</msb>
               <lsb>4</lsb>
-            <enumeratedValues><name>TTRG</name><usage>read-write</usage></enumeratedValues>
+            <enumeratedValues><name>TTRG</name><usage>read-write</usage><enumeratedValue><name>LE_8_BYTES</name><description>8 bytes</description><value>0</value></enumeratedValue><enumeratedValue><name>LE_4_BYTES</name><description>4 bytes</description><value>1</value></enumeratedValue><enumeratedValue><name>LE_2_BYTES</name><description>2 bytes</description><value>2</value></enumeratedValue><enumeratedValue><name>EQ_0_BYTES</name><description>0 bytes</description><value>3</value></enumeratedValue></enumeratedValues>
             </field>
             <field>
               <name>RTRG</name>
@@ -64979,7 +64979,7 @@
               <name>RSTRG</name>
               <msb>10</msb>
               <lsb>8</lsb>
-            <enumeratedValues><name>RSTRG</name><usage>read-write</usage></enumeratedValues>
+            <enumeratedValues><name>RSTRG</name><usage>read-write</usage><enumeratedValue><name>GE_15_BYTES</name><description>15 bytes</description><value>0</value></enumeratedValue><enumeratedValue><name>GE_1_BYTE</name><description>1 byte</description><value>1</value></enumeratedValue><enumeratedValue><name>GE_4_BYTES</name><description>4 bytes</description><value>2</value></enumeratedValue><enumeratedValue><name>GE_6_BYTES</name><description>6 bytes</description><value>3</value></enumeratedValue><enumeratedValue><name>GE_8_BYTES</name><description>8 bytes</description><value>4</value></enumeratedValue><enumeratedValue><name>GE_10_BYTES</name><description>10 bytes</description><value>5</value></enumeratedValue><enumeratedValue><name>GE_12_BYTES</name><description>12 bytes</description><value>6</value></enumeratedValue><enumeratedValue><name>GE_14_BYTES</name><description>14 bytes</description><value>7</value></enumeratedValue></enumeratedValues>
             </field>
           </fields>
         </register>

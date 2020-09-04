@@ -20,16 +20,16 @@ SCIF0:
 
   FCR:
     RSTRG:
-      _15: [0, "15 bytes"]
-      _1: [1,"1 byte"]
-      _4: [2,"4 bytes"]
-      _6: [3,"6 bytes"]
-      _8: [4,"8 bytes"]
-      _10: [5, "10 bytes"]
-      _12: [6, "12 bytes"]
-      _14: [7, "14 bytes"]
+      GE_15_BYTES: [0, "15 bytes"]
+      GE_1_BYTE: [1,"1 byte"]
+      GE_4_BYTES: [2,"4 bytes"]
+      GE_6_BYTES: [3,"6 bytes"]
+      GE_8_BYTES: [4,"8 bytes"]
+      GE_10_BYTES: [5, "10 bytes"]
+      GE_12_BYTES: [6, "12 bytes"]
+      GE_14_BYTES: [7, "14 bytes"]
     TTRG:
-      _8: [0, "8 bytes"]
-      _4: [1, "4 bytes"]
-      _2: [2, "2 bytes"]
-      _0: [3, "0 bytes"]
+      LE_8_BYTES: [0, "8 bytes"]
+      LE_4_BYTES: [1, "4 bytes"]
+      LE_2_BYTES: [2, "2 bytes"]
+      EQ_0_BYTES: [3, "0 bytes"]

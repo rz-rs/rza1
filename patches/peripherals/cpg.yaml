@@ -19,13 +19,13 @@ CPG:
         - 3
         - "Normal operation: Hi-Z, Software Standy Mode: Hi-Z, Deep Standby Mode: Hi-Z"
     IFC:
-      _1: [0, "1/1 time"]
-      _2_OVER_3: [1, "2/3 time"]
-      _1_OVER_3: [3, "1/3 time"]
+      UNITY: [0, "1/1 time"]
+      TWO_THIRD: [1, "2/3 time"]
+      ONE_THIRD: [3, "1/3 time"]
 
   FRQCR2:
     resetValue: 0x0003
 
     GFC:
-      _2_OVER_3: [1, "2/3 time"]
-      _1_OVER_3: [3, "1/3 time"]
+      TWO_THIRD: [1, "2/3 time"]
+      ONE_THIRD: [3, "1/3 time"]
